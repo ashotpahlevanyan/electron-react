@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Sidebar from './components/Sidebar';
-import Intro from './components/Intro';
-import One from './components/One';
-import Two from './components/Two';
-import Three from './components/Three';
+import Sessions from './components/Sessions';
+import Cattlemax from './components/Cattlemax';
+import Tags from './components/Tags';
+import Scales from './components/Scales';
+import Settings from './components/Settings';
+import Help from './components/Help';
 import Footer from './components/Footer';
 
 class App extends Component {
@@ -14,10 +16,12 @@ class App extends Component {
       <div className="App">
 	      <Sidebar />
 	      <div id="wrapper">
-					<Intro />
-		      <One />
-		      <Two />
-		      <Three />
+					<Sessions />
+		      <Cattlemax />
+		      <Tags />
+		      <Scales />
+		      <Settings />
+		      <Help />
 	      </div>
 	      <Footer />
       </div>

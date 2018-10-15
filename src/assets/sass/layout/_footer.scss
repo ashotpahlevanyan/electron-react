@@ -1,0 +1,8 @@
+.footer {
+  @extend %bg-color-purple-600;
+  position: fixed;
+  left: 200px;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}

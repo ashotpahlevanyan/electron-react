@@ -3,6 +3,7 @@ a {
   text-decoration: none;
   padding: 5px 10px;
   display: inline-block;
+  font-weight: bold;
   &:hover, &:focus {
     @extend %color-cyan-a200;
   }

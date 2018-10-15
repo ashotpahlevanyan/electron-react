@@ -1,24 +1,27 @@
 .fullscreen {
   width: 100vw;
   height: 100vh;
-  padding: 20px 20px 20px 160px;
+  padding: 20px 20px 60px 200px;
 }
 .container {
   padding: 20px;
 }
 
-.one {
+.sessions {
   @extend %bg-color-red-600;
 }
-.two {
+.cattlemax {
   @extend %bg-color-yellow-600;
 }
-.three {
+.tags {
   @extend %bg-color-orange-600;
 }
-.intro {
+.scales {
   @extend %bg-color-green-600;
 }
-.footer {
-  @extend %bg-color-purple-600;
+.settings {
+  @extend %bg-color-yellow-600;
+}
+.help {
+  @extend %bg-color-teal-600;
 }

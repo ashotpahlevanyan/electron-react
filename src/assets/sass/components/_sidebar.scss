@@ -6,16 +6,27 @@
   left: 0;
   bottom: 0;
   padding: 10px 0;
-  width: 160px;
+  width: 200px;
   .inner {
-    text-align: right;
+    text-align: left;
     li {
       display: block;
       a {
+        position: relative;
         display: block;
         padding: 15px 15px;
+        font-size: 14px;
+        padding-left: 50px;
+        line-height: 1.2;
         &:hover, &:focus {
-          @extend %bg-color-purple-600;
+          @extend %bg-color-orange-900;
+          @extend %color-indigo-900;
+        }
+        .svg-inline--fa {
+          position: absolute;
+          top: 15px;
+          left: 10px;
+          font-size: 22px;
         }
       }
     }
