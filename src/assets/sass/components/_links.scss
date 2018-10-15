@@ -1,0 +1,9 @@
+a {
+  @extend %color-orange-700;
+  text-decoration: none;
+  padding: 5px 10px;
+  display: inline-block;
+  &:hover, &:focus {
+    @extend %color-cyan-a200;
+  }
+}

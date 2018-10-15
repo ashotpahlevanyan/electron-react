@@ -1,0 +1,24 @@
+.fullscreen {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px 20px 20px 160px;
+}
+.container {
+  padding: 20px;
+}
+
+.one {
+  @extend %bg-color-red-600;
+}
+.two {
+  @extend %bg-color-yellow-600;
+}
+.three {
+  @extend %bg-color-orange-600;
+}
+.intro {
+  @extend %bg-color-green-600;
+}
+.footer {
+  @extend %bg-color-purple-600;
+}

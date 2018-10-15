@@ -1,3 +1,9 @@
+/* ======== Material Design Palettes ========*/
+
+@import '../../../node_modules/sass-material-colors/sass/sass-material-colors';
+@import '../../../node_modules/sass-material-colors/sass/sass-material-colors-placeholders';
+@import '../../../node_modules/sass-material-colors/sass/sass-material-colors-classes';
+
 /* ======== Base ========*/
 @import 'base/reset';
 @import 'base/mixins';
@@ -5,6 +11,8 @@
 @import 'base/base';
 
 /* ======== Components ========*/
-
+@import "components/links";
+@import "components/sidebar";
 
 /* ======== Layout ========*/
+@import "layout/layout";

@@ -1,0 +1,23 @@
+.sidebar {
+  @extend %bg-color-indigo-900;
+  border-right: 1px solid material-color('purple', '900');
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 10px 0;
+  width: 160px;
+  .inner {
+    text-align: right;
+    li {
+      display: block;
+      a {
+        display: block;
+        padding: 15px 15px;
+        &:hover, &:focus {
+          @extend %bg-color-purple-600;
+        }
+      }
+    }
+  }
+}
