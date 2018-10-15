@@ -1,5 +1,5 @@
 .sidebar {
-  @extend %bg-color-indigo-900;
+  @extend %bg-color-cyan-900;
   border-right: 1px solid material-color('purple', '900');
   position: fixed;
   top: 0;
@@ -20,7 +20,7 @@
         line-height: 1.2;
         &:hover, &:focus {
           @extend %bg-color-orange-900;
-          @extend %color-indigo-900;
+          //@extend %color-indigo-900;
         }
         .svg-inline--fa {
           position: absolute;
