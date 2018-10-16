@@ -8,20 +8,20 @@
 }
 
 .sessions {
-  @extend %bg-color-red-600;
+  @extend %bg-color-red-200;
 }
 .cattlemax {
-  @extend %bg-color-yellow-600;
+  @extend %bg-color-pink-200;
 }
 .tags {
-  @extend %bg-color-orange-600;
+  @extend %bg-color-purple-200;
 }
 .scales {
-  @extend %bg-color-green-600;
+  @extend %bg-color-blue-200;
 }
 .settings {
-  @extend %bg-color-yellow-600;
+  @extend %bg-color-indigo-200;
 }
 .help {
-  @extend %bg-color-teal-600;
+  @extend %bg-color-cyan-200;
 }

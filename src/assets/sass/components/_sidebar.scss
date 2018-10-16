@@ -1,12 +1,22 @@
 .sidebar {
   @extend %bg-color-cyan-900;
-  border-right: 1px solid material-color('purple', '900');
+  //border-right: 1px solid material-color('purple', '900');
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   padding: 10px 0;
   width: 200px;
+  .logo {
+    width: 100%;
+    padding: 10px;
+    display: block;
+    cursor: pointer;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
   .inner {
     text-align: left;
     li {
@@ -18,9 +28,13 @@
         font-size: 14px;
         padding-left: 50px;
         line-height: 1.2;
+        color: $colorWhite;
         &:hover, &:focus {
           @extend %bg-color-orange-900;
-          //@extend %color-indigo-900;
+        }
+        &.active {
+          @extend %bg-color-orange-900;
+          @extend %color-cyan-a200;
         }
         .svg-inline--fa {
           position: absolute;

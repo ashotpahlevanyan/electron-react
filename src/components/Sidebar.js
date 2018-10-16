@@ -1,19 +1,21 @@
 import React from 'react';
-//import {FontAwesomeIcon} from '../../node_modules/@fortawesome/react-fontawesome/index';
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome , faListAlt, faShoppingCart, faCog, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+
 const Sidebar = () => {
-	return (
+	return(
 		<section id="sidebar" className="sidebar">
 			<div class="inner">
+				<NavLink to="/" className="logo"><img src="./images/TagMax-2x.png" alt="Logo"/></NavLink>
 				<nav>
 					<ul>
-						<li><a href="#sessions"><FontAwesomeIcon icon={faListAlt}/>Sessions</a></li>
-						<li><a href="#cattlemax"><FontAwesomeIcon icon={faHome}/>CattleMax</a></li>
-						<li><a href="#tags"><FontAwesomeIcon icon={faShoppingCart}/>Shop CattleTags.com</a></li>
-						<li><a href="#scales"><FontAwesomeIcon icon={faShoppingCart}/>Shop CattleScales.com</a></li>
-						<li><a href="#settings"><FontAwesomeIcon icon={faCog}/>Settings</a></li>
-						<li><a href="#help"><FontAwesomeIcon icon={faQuestionCircle}/>Help</a></li>
+						<li><NavLink to="/sessions" activeClassName="active"><FontAwesomeIcon icon={faListAlt}/>Sessions</NavLink></li>
+						<li><NavLink to="/cattlemax" activeClassName="active"><FontAwesomeIcon icon={faHome}/>CattleMax</NavLink></li>
+						<li><NavLink to="/tags" activeClassName="active"><FontAwesomeIcon icon={faShoppingCart}/>Shop CattleTags.com</NavLink></li>
+						<li><NavLink to="/scales" activeClassName="active"><FontAwesomeIcon icon={faShoppingCart}/>Shop CattleScales.com</NavLink></li>
+						<li><NavLink to="/settings" activeClassName="active"><FontAwesomeIcon icon={faCog}/>Settings</NavLink></li>
+						<li><NavLink to="/help" activeClassName="active"><FontAwesomeIcon icon={faQuestionCircle}/>Help</NavLink></li>
 					</ul>
 				</nav>
 			</div>
