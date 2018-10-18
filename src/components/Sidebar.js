@@ -6,7 +6,7 @@ import { faHome , faListAlt, faShoppingCart, faCog, faQuestionCircle } from '@fo
 const Sidebar = () => {
 	return(
 		<section id="sidebar" className="sidebar">
-			<div class="inner">
+			<div className="inner">
 				<NavLink to="/" className="logo"><img src="./images/TagMax-2x.png" alt="Logo"/></NavLink>
 				<nav>
 					<ul>

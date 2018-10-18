@@ -7,6 +7,9 @@
   padding: 20px;
 }
 
+.home {
+  @extend %bg-color-lime-200;
+}
 .sessions {
   @extend %bg-color-red-200;
 }

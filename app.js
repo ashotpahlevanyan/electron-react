@@ -25,7 +25,7 @@ function createWindow() {
 	mainWindow.loadURL(startUrl);
 
 	// Open the DevTools.
-	//mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', function () {
@@ -33,7 +33,15 @@ function createWindow() {
 		// in an array if your app supports multi windows, this is the time
 		// when you should delete the corresponding element.
 		mainWindow = null
-	})
+	});
+
+	const { default: installExtension, REACT_DEVELOPER_TOOLS} = require('electron-devtools-installer');
+
+	installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
+		console.log(`Added Extension: ${name}`);
+	}).catch((err) => {
+		console.log(`An Error occured: ${err}`);
+	});
 }
 
 // This method will be called when Electron has finished

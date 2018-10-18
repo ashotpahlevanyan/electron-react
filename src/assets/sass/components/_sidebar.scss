@@ -24,11 +24,11 @@
       a {
         position: relative;
         display: block;
-        padding: 15px 15px;
+        padding: 15px 15px 15px 50px;
         font-size: 14px;
-        padding-left: 50px;
         line-height: 1.2;
         color: $colorWhite;
+        text-decoration: none;
         &:hover, &:focus {
           @extend %bg-color-orange-900;
         }

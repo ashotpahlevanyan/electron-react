@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import 'sass-material-colors';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
