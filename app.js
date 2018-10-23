@@ -13,7 +13,11 @@ let mainWindow;
 
 function createWindow() {
 	// Create the browser window.
-	mainWindow = new BrowserWindow({width: 800, height: 600});
+	mainWindow = new BrowserWindow({width: 1100, height: 800});
+	let contents = mainWindow.webContents;
+	contents.executeJavaScript('console.log(this)')
+		.then(console.log)
+		.catch(console.error);
 
 	// and load the index.html of the app.
 	// mainWindow.loadURL('http://localhost:3000');
