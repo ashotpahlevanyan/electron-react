@@ -81,6 +81,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.4.1",
     "bleno": "^0.5.0",
+    "bluetooth-serial-port": "^2.1.7",
     "concurrently": "^4.0.1",
     "debug": "^4.1.0",
     "electron": "^3.0.4",

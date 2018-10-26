@@ -1,54 +1,42 @@
 import React, {Component} from 'react';
 import { Button } from 'reactstrap';
-//import Bluetooth from 'node-web-bluetooth';
-
-
-// async function connect() {
-// 	const device = await Bluetooth.requestDevice(options);
-// 	const server = await device.connect();
-// 	const service = await server.getPrimaryService('heart_rate');
-// 	const char = await service.getCharacteristic('heart_rate_measurement');
-// 	await char.startNotifications();
-// 	char.on('characteristicvaluechanged', (data) => {
-// 		// parse heart-rate data here
-// 	});
-// 	await char.stopNotifications();
-// 	await server.disconnect();
-// }
+import noble from 'noble';
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			peripherals: 'Hello',
-			options : {
-				filters: [
-					{namePrefix:'Nokia'},
-					{services: ['heart_rate']},
-					{services: [0x1802, 0x1803]},
-					{services: ['c48e6067-5295-48d3-8d5c-0395f61792b1']},
-					{name: 'ExampleName'}
-				],
-				optionalServices: ['battery_service']
-			}
+			devices: 'Empty',
+			bt: ''
 		};
 
 		this.handleClick = this.handleClick.bind(this);
 	}
 	componentDidMount() {
+		noble.on('stateChange', function(state) {
+			if (state === 'poweredOn') {
+				noble.startScanning();
+			} else {
+				noble.stopScanning();
+			}
+		});
 
+		noble.on('discover', function(peripheral) {
+			let per =
+				'id =' + peripheral.id +
+				', \nwith address <' + peripheral.address +
+				', \n' + peripheral.addressType +
+				', \nconnectable ' + peripheral.connectable +
+				', \nRSSI ' + peripheral.rssi +
+				', \nhello my local name is: ' + peripheral.advertisement.localName +
+			  ', \n with Services : ' + JSON.stringify(peripheral.advertisement.serviceUuids);
+
+			this.setState(Object.assign({}, this.state, {devices: per}));
+		});
 	}
-	handleClick() {
-		//connect();
-		navigator.bluetooth.requestDevice(this.state.options).then(function(device) {
-			console.log('Name: ' + device.name);
-			this.setState(Object.assign({}, this.state, {peripherals: 'Yalla'}));
-			// Do something with the device.
-		})
-			.catch(function(error) {
-				console.log("Something went wrong. " + error);
-			});
 
+	handleClick() {
+		//this.setState(Object.assign({}, this.state, {devices: alldevices}));
 	}
 
 	render() {
@@ -58,8 +46,16 @@ class Home extends Component {
 				<div className="form-group">
 					<Button color="primary" onClick={this.handleClick}>Scan Bluetooth</Button>
 				</div>
-				<div className="state">{this.state.peripherals}</div>
-
+				<div className="state">{this.state.devices}</div>
+				<select className="select form-control">
+					<option value="Ashots BT">Ashots BT</option>
+					<option value="Saqo BT">2</option>
+					<option value="Valod BT">3</option>
+					<option value="Lyudmila BT">4</option>
+				</select>
+				<div className="form-group">
+					<Button color="primary" onClick={this.handleClick}>Connect To Device</Button>
+				</div>
 			</section>
 		);
 	}
