@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Button } from 'reactstrap';
-import noble from 'noble';
 
 class Home extends Component {
 	constructor(props) {
@@ -13,26 +12,6 @@ class Home extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	componentDidMount() {
-		noble.on('stateChange', function(state) {
-			if (state === 'poweredOn') {
-				noble.startScanning();
-			} else {
-				noble.stopScanning();
-			}
-		});
-
-		noble.on('discover', function(peripheral) {
-			let per =
-				'id =' + peripheral.id +
-				', \nwith address <' + peripheral.address +
-				', \n' + peripheral.addressType +
-				', \nconnectable ' + peripheral.connectable +
-				', \nRSSI ' + peripheral.rssi +
-				', \nhello my local name is: ' + peripheral.advertisement.localName +
-			  ', \n with Services : ' + JSON.stringify(peripheral.advertisement.serviceUuids);
-
-			this.setState(Object.assign({}, this.state, {devices: per}));
-		});
 	}
 
 	handleClick() {

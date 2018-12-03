@@ -87,8 +87,10 @@
     "electron": "^3.0.4",
     "electron-devtools-installer": "^2.2.4",
     "foreman": "^3.0.1",
+    "net": "^1.0.2",
     "noble": "^1.9.1",
     "node-web-bluetooth": "0.0.8",
+    "path": "^0.12.7",
     "sass-material-colors": "0.0.5"
   },
   "jest": {
