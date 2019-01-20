@@ -11,6 +11,7 @@ import Settings from './components/Settings';
 import Help from './components/Help';
 import Footer from './components/Footer';
 
+
 class App extends Component {
   render() {
     return (
