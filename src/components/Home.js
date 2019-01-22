@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import { Button } from 'reactstrap';
 let electron; // = setTimeout(function(){window.require('electron')}, 2000);
 let ipcRenderer; // = electron.ipcRenderer;
+let navigator;
 
 async function loadDeps() {
 	electron = await window.require('electron');
 	ipcRenderer = await electron.ipcRenderer;
+	navigator = window.navigator;
 }
 
 class Home extends Component {
@@ -33,6 +35,10 @@ class Home extends Component {
 			.then(() => {
 				ipcRenderer.send('rm-scan', 'ping');
 			});
+		console.log("navigator", navigator);
+		window.navigator.bluetooth.requestDevice({ acceptAllDevices: true })
+			.then(device => {console.log(device);})
+			.catch(error => {console.log(error);});
 	}
 
 	render() {
