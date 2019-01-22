@@ -4,6 +4,7 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 const { ipcMain } = require('electron');
+//const device = require('./src/connector/connector.js');
 
 //let noble = require('noble');
 
@@ -68,17 +69,13 @@ app.on('window-all-closed', function () {
 });
 
 app.on('activate', function () {
-	// On OS X it's common to re-create a window in the app when the
-	// dock icon is clicked and there are no other windows open.
 	if (mainWindow === null) {
-		createWindow()
+		createWindow();
 	}
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-
 
 ipcMain.on('rm-scan', (event, arg) => {
+	// let connection = device.connectToAddress(device.pairedDevices[0]);
 	event.sender.send('mr-scan', {res: {}});
 });

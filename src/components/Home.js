@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import { Button } from 'reactstrap';
-const electron = window.require('electron');
-const ipcRenderer = electron.ipcRenderer;
+let electron; // = setTimeout(function(){window.require('electron')}, 2000);
+let ipcRenderer; // = electron.ipcRenderer;
+
+async function loadDeps() {
+	electron = await window.require('electron');
+	ipcRenderer = await electron.ipcRenderer;
+}
 
 class Home extends Component {
 	constructor(props) {
@@ -14,18 +19,21 @@ class Home extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	componentDidMount() {
-		ipcRenderer.on('mr-scan', (event, arg) => {
-			console.log('mr-scan', arg);
-		});
+	componentWillMount() {
+		loadDeps()
+			.then(() => {
+				ipcRenderer.on('mr-scan', (event, arg) => {
+					console.log('mr-scan', arg);
+				});
+			});
 	}
 
 	handleClick() {
-		ipcRenderer.send('rm-scan', 'ping');
+		loadDeps()
+			.then(() => {
+				ipcRenderer.send('rm-scan', 'ping');
+			});
 	}
-
-
-
 
 	render() {
 		return (
