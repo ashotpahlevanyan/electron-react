@@ -17,7 +17,7 @@ let mainWindow;
 
 function createWindow() {
 	// Create the browser window.
-	mainWindow = new BrowserWindow({width: 1100, height: 800});
+	mainWindow = new BrowserWindow({width: 1100, height: 800, experimentalFeatures: true });
 	let contents = mainWindow.webContents;
 	contents.executeJavaScript('console.log(this)')
 		.then(console.log)
