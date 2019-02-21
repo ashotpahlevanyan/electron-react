@@ -10,6 +10,8 @@ const { ipcMain } = require('electron');
 
 const path = require('path');
 const url = require('url');
+app.commandLine.appendSwitch(‘enable-experimental-web-platform-features’, true);
+app.commandLine.appendSwitch('enable-web-bluetooth', true);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
