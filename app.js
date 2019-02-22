@@ -5,6 +5,22 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const { ipcMain } = require('electron');
 //const device = require('./src/connector/connector.js');
+//const Bluetooth	= require('node-web-bluetooth');
+
+/*function connect() {
+	const device = Bluetooth.requestDevice({})
+		.then(() => {
+			ipcMain.send("mr-found", device);
+			const server = device[0].connect()
+				.then(() => {
+					console.log("Connected to ", device[0]);
+					server.disconnect()
+						.then(() => {
+							console.log("Disconnected from ", device[0]);
+						});
+				});
+		});
+}*/
 
 //let noble = require('noble');
 
@@ -76,6 +92,11 @@ app.on('activate', function () {
 
 
 ipcMain.on('rm-scan', (event, arg) => {
+	// connect()
+	// 	.then( () => {
+	// 		event.sender.send('mr-scan', {res: {}});
+	// 	});
 	// let connection = device.connectToAddress(device.pairedDevices[0]);
 	event.sender.send('mr-scan', {res: {}});
+
 });

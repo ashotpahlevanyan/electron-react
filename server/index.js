@@ -2,10 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 4000;
 const device = require("./bluetooth.js");
+const cors = require("cors");
 
 const app = express();
 let connectionObj;
 app.use(bodyParser.json({extended: true}));
+app.use(cors());
 
 app.get("/", (req, res) => {
 	res.json({val : "300"});
@@ -30,7 +32,7 @@ app.get("/connection", (req, res) => {
 });
 
 app.get("/read", (req, res) => {
-	res.json({val : "read"});
+	res.json({val : "read" + Date.now().toLocaleString()});
 });
 
 app.post("/write", (req, res) => {
