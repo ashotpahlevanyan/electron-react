@@ -1,16 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import 'sass-material-colors';
-import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
+import { render } from 'react-dom';
+import store from './js/store/index';
+import Root from './js/Root';
 import * as serviceWorker from './serviceWorker';
 
+console.log(store.getState());
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(
+	<Root store = {store}/>,
+	document.getElementById('root')
+);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+if(module.hot) {
+	module.hot.accept();
+}
+
+/*
+* If you want your app to work offline and load faster, you can change
+* unregister() to register() below. Note this comes with some pitfalls.
+* Learn more about service workers: http://bit.ly/CRA-PWA
+* */
+serviceWorker.register();

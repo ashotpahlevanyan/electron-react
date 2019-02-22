@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import axios from "axios";
 
@@ -35,12 +35,12 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		axios.get("http://localhost:4000/read")
-			.then(res => {
-				const readData = res.data;
-				console.log(readData);
-				this.setState(Object.assign({}, this.state, readData));
-			});
+		// axios.get("http://localhost:4000/read")
+		// 	.then(res => {
+		// 		const readData = res.data;
+		// 		console.log(readData);
+		// 		this.setState(Object.assign({}, this.state, readData));
+		// 	});
 	}
 
 	handleClick() {

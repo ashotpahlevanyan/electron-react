@@ -7,6 +7,9 @@
   padding: 20px;
 }
 
+.wrapper {
+  text-align: center;
+}
 .home {
   @extend %bg-color-lime-200;
 }
