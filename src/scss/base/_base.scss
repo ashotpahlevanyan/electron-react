@@ -4,6 +4,7 @@ html, body, * {
 
 body {
   @extend %bg-color-indigo-600;
+  position: relative;
   color: $colorBlack;
   overflow-x: hidden;
   font-size: 16px;

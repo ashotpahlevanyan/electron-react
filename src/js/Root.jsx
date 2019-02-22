@@ -18,7 +18,7 @@ import library from './components/FontAwesomeLibrary';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'sass-material-colors';
-import '../assets/scss/main.scss';
+import '../scss/main.scss';
 
 
 const history = createBrowserHistory();
