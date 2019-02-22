@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import axios from "axios";
+import BluetoothContainer from '../containers/BluetoothContainer';
 
 let electron; // = setTimeout(function(){window.require('electron')}, 2000);
 let ipcRenderer; // = electron.ipcRenderer;
@@ -49,11 +50,11 @@ class Home extends Component {
 				ipcRenderer.send('rm-scan', 'ping');
 			});
 	}
-
 	render() {
 		return (
 			<section className="wrapper fullscreen home">
 				<h2>Home</h2>
+				<BluetoothContainer/>
 				<div className="form-group">
 					<Button color="primary" onClick={this.handleClick}>Scan Bluetooth</Button>
 				</div>
