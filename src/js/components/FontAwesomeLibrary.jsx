@@ -3,7 +3,7 @@ import {
 	faCoffee, faMugHot, faTimes,
 	faBars, faChevronUp, faHome,
 	faListAlt, faShoppingCart, faCog,
-	faQuestionCircle
+	faQuestionCircle, faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faCoffee);
@@ -11,6 +11,7 @@ library.add(faMugHot);
 library.add(faTimes);
 library.add(faBars);
 library.add(faChevronUp);
+library.add(faChevronLeft);
 library.add(faHome);
 library.add(faListAlt);
 library.add(faShoppingCart);

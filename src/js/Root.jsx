@@ -32,13 +32,12 @@ const Root = ({ store }) => (
 					<Route exact path="/" component={Home} />
 					<Route path="/sessions" component={Sessions} />
 					<Route path="/cattlemax" component={Cattlemax} />
-					<Route path="/tags" component={Tags} />
+					{/*<Route path="/tags" component={Tags} />
 					<Route path="/scales" component={Scales} />
 					<Route path="/settings" component={Settings} />
-					<Route path="/help" component={Help} />
+					<Route path="/help" component={Help} />*/}
 				</div>
 				<UpToTop />
-				<Footer />
 			</div>
 		</Router>
 	</Provider>

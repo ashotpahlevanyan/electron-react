@@ -1,6 +1,26 @@
 .sidebar {
   @extend %bg-color-cyan-900;
   //border-right: 1px solid material-color('purple', '900');
+  &.closed {
+    .inner {
+      display: none;
+    }
+    position: relative;
+    top: unset;
+    left: unset;
+    bottom: unset;
+    padding: 0;
+    width: unset;
+    .toggle {
+      right: auto;
+      left: 20px;
+      top: 10px;
+      background-color: $brandRed;
+      .faicon {
+        color: $colorWhite;
+      }
+    }
+  }
   position: fixed;
   top: 0;
   left: 0;
@@ -18,6 +38,7 @@
     }
   }
   .inner {
+    display: block;
     text-align: left;
     li {
       display: block;
@@ -43,6 +64,30 @@
           font-size: 22px;
         }
       }
+    }
+  }
+  .toggle {
+    cursor: pointer;
+    position: absolute;
+    right: -60px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid $brandRed;
+    @include border-radius(3px);
+    &:active, &:focus {
+      outline: none;
+      border: 2px solid $brandRed;
+    }
+    background-color: $colorWhite;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .faicon {
+      font-size: 22px;
+      color: $brandRed;
     }
   }
 }

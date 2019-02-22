@@ -1,10 +1,16 @@
 .footer {
   @extend %bg-color-cyan-900;
   color: $colorWhite;
-  padding: 10px;
-  position: fixed;
-  left: 200px;
+  padding: 10px 5px;
+  position: absolute;
+  left: 0;
   right: 0;
   bottom: 0;
   z-index: 2;
+  li {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
 }
