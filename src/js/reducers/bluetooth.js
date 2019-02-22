@@ -7,7 +7,11 @@ import {
 } from '../actions/bluetooth';
 
 const INITIAL_STATE = {
-	bluetooth: {devices: [], error:null, loading: false},
+	devicesList: {devices: [], error:null, loading: false},
+	connectedDevice: {device: {}, error:null, loading: false},
+	disconnectedDevice: {device: {}, error:null, loading: false},
+	readData: {data: {}, error:null, loading: false},
+	writeData: {data: {}, error:null, loading: false},
 };
 
 export default function(state = INITIAL_STATE, action) {
