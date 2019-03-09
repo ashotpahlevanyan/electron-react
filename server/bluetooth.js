@@ -3,39 +3,42 @@ const bluetooth = require('node-bluetooth');
 const device = new bluetooth.DeviceINQ();
 
 device.pairedDevices = [];
+device.connection = {};
 
 device.addDeviceToList = function(item) {
 	device.pairedDevices.push(item);
 };
 
-device.discoverDevices = function() {
+device.discoverDevices = () => {
 	device.listPairedDevices(device.addDeviceToList);
 };
 
-device.connectToDevice = function(deviceItem) {
-	device.findSerialPortChannel(deviceItem.address, function(channel){
-		console.log(`Found RFCOMM channel for serial port on ${deviceItem.name}: `, channel);
+device.connectToDevice = ({address, name}) => {
+	device.findSerialPortChannel(address, function(channel){
+		console.log(`Found RFCOMM channel for serial port on ${name}: `, channel);
 
-		try {
-			bluetooth.connect(deviceItem.address, channel, function(err, connection){
-				//if(err) return console.error(err);
-				console.log(`Connection Successful: {\n name: ${deviceItem.name}, \n address : ${deviceItem.address}, \n channel: ${channel} \n }`);
+		bluetooth.connect(address, channel, function(err, connection){
+			if(err) return console.error(err);
 
+			console.log(
+				`Connection Successful: {
+				name: ${name}, 
+				address : ${address}, 
+				channel: ${channel},
+				connection: ${connection}
+				}`
+			);
 
-				connection.on('data', (buffer) => {
-					console.log('received message:', buffer.toString());
-				});
-
-				// connection.write(new Buffer('Hello!', 'utf-8'), () => {
-				// 	console.log("wrote");
-				// });
-
-				return {status: 1, error: {}, connection: connection};
+			connection.on('data', (buffer) => {
+				console.log('received message:', buffer.toString());
 			});
-		} catch (err) {
-			return { status: 0, error: err, connection: {} };
-		}
+
+			// connection.write(new Buffer('Hello!', 'utf-8'), () => {
+			// 	console.log("wrote");
+			// });
+		});
 	});
 };
+
 
 module.exports = device;

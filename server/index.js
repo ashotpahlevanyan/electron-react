@@ -5,33 +5,33 @@ const device = require("./bluetooth.js");
 const cors = require("cors");
 
 const app = express();
-let connectionObj;
 app.use(bodyParser.json({extended: true}));
 app.use(cors());
 
-app.get("/", (req, res) => {
-	res.json({val : "300"});
-});
+let connectionObj;
 
-app.get("/devices", (req, res) => {
+let readData;
+
+
+app.get("/", (req, res) => {
 	device.discoverDevices();
 	const devices = device.pairedDevices;
 	res.json({devices: devices});
 });
 
-app.get("/connection", (req, res) => {
-	const deviceItem = req.body.deviceItem;
-	if(device.pairedDevices && device.pairedDevices.indexOf(deviceItem) > -1) {
-		let connection = device.connectToDevice(deviceItem);
-		if(connection.status) {
-			connectionObj = connection;
-			res.json({connected: true});
-		}
+app.get("/connect", async (req, res) => {
+	const {address, name} = req.body;
+	try {
+		const connection = await device.connectToDevice({address, name});
+		console.log("=====Connection===== : ", connection);
+		res.json({connected: true, connection: connection});
+	} catch(error) {
+		res.json({error: error, connected: false});
 	}
-	res.json({connected: false});
 });
 
 app.get("/read", (req, res) => {
+
 	res.json({val : "read" + Date.now().toLocaleString()});
 });
 
