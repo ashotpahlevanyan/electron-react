@@ -23,31 +23,39 @@ class Home extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		loadDeps()
 			.then(() => {
-				ipcRenderer.on('mr-scan', (event, arg) => {
-					console.log('mr-scan', arg);
+				ipcRenderer.on('all-devices-list', (event, arg) => {
+					console.log('devicesList', arg);
 				});
-				ipcRenderer.on('mr-found', (event, arg) => {
-					console.log('mr-found', arg);
+
+				ipcRenderer.on('device-is-connected', (event, arg) => {
+					const {connected, connection} = arg;
+					console.log(connected, connection);
+				});
+
+				ipcRenderer.on('device-not-connected',  (event, arg) => {
+					const {error, connected} = arg;
+					console.log(error, connected);
+				});
+
+				ipcRenderer.on('device-is-disconnected', (event, arg) => {
+					const {disconnected, connection} = arg;
+					console.log(disconnected, connection);
+				});
+
+				ipcRenderer.on('device-not-disconnected', (event, arg) => {
+					const {error, disconnected} = arg;
+					console.log(error, disconnected);
 				});
 			});
-	}
-
-	componentDidMount() {
-		// axios.get("http://localhost:4000/read")
-		// 	.then(res => {
-		// 		const readData = res.data;
-		// 		console.log(readData);
-		// 		this.setState(Object.assign({}, this.state, readData));
-		// 	});
 	}
 
 	handleClick() {
 		loadDeps()
 			.then(() => {
-				ipcRenderer.send('rm-scan', 'ping');
+				ipcRenderer.send('list-all-devices');
 			});
 	}
 	render() {

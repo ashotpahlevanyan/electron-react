@@ -1,5 +1,7 @@
 const electron = require('electron');
 const { ipcMain } = require('electron');
+const device = require("./server/bluetooth.js");
+
 
 /*
 * Module to control application life.
@@ -21,6 +23,7 @@ app.commandLine.appendSwitch('enable-web-bluetooth', true);
 * be closed automatically when the JavaScript object is garbage collected.
 * */
 let mainWindow;
+
 
 function createWindow() {
 	/*
@@ -67,8 +70,9 @@ function createWindow() {
 	installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
 		console.log(`Added Extension: ${name}`);
 	}).catch((err) => {
-		console.log(`An Error occured: ${err}`);
+		console.log(`An Error occurred: ${err}`);
 	});
+
 }
 
 /*
@@ -93,6 +97,32 @@ app.on('activate', function () {
 	}
 });
 
-ipcMain.on('rm-scan', (event, arg) => {
-	event.sender.send('mr-scan', {res: {}});
+ipcMain.on('list-all-devices', (event, arg) => {
+	device.discoverDevices();
+	const devices = device.pairedDevices;
+	event.sender.send('all-devices-list', {devices: devices});
+});
+
+ipcMain.on('connect-to-device', (event, arg) => {
+	const {address, name} = arg;
+	try {
+		const connection = device.connectToDevice({address, name});
+		connection.then(connectionItem => {
+			event.sender.send('device-is-connected', {connected: true, connection: connectionItem});
+		});
+	} catch(error) {
+		event.sender.send('device-not-connected', {error: error, connected: false});
+	}
+});
+
+ipcMain.on('disconnect-from-device', (event, arg) => {
+	const {address, name} = arg;
+	try {
+		const connection = device.disconnectFromDevice({address, name});
+		connection.then(connectionItem => {
+			event.sender.send('device-is-disconnected', {disconnected: true, connection: connectionItem});
+		});
+	} catch(error) {
+		event.sender.send('device-not-disconnected', {error: error, disconnected: false});
+	}
 });
