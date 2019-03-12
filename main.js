@@ -67,6 +67,9 @@ function createWindow() {
 		REACT_DEVELOPER_TOOLS
 	} = require('electron-devtools-installer');
 
+	//require('electron-react-devtools').install();
+
+
 	installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
 		console.log(`Added Extension: ${name}`);
 	}).catch((err) => {

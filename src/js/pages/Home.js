@@ -16,11 +16,12 @@ class Home extends Component {
 		super(props);
 		this.state = {
 			devices: '',
-			bt: '',
-			readData: 'Empty'
+			selectedDevice: {}
 		};
 
 		this.handleClick = this.handleClick.bind(this);
+		this.renderDevices = this.renderDevices.bind(this);
+		this.handleSelect = this.handleSelect.bind(this);
 	}
 
 	componentDidMount() {
@@ -28,6 +29,10 @@ class Home extends Component {
 			.then(() => {
 				ipcRenderer.on('all-devices-list', (event, arg) => {
 					console.log('devicesList', arg);
+					const {devices} = arg;
+
+					this.setState({devices: devices[0], selectedDevice: devices[0][0].address});
+					console.log(this.state);
 				});
 
 				ipcRenderer.on('device-is-connected', (event, arg) => {
@@ -58,6 +63,21 @@ class Home extends Component {
 				ipcRenderer.send('list-all-devices');
 			});
 	}
+	handleSelect(event) {
+		this.setState({selectedDevice: event.target.value});
+		console.log(this.state);
+	}
+	renderDevices = () => {
+		const devices = this.state.devices;
+		if(!(devices && devices.length)) {
+			return <div>No Device Found</div>;
+		}
+		const deviceList = devices.map((device, index) => {
+			return <option key={index} value={device.address}>{device.name} -- {device.address}</option>
+		});
+		return <select name="devices" id="devices" onChange={this.handleSelect} value={this.state.selectedDevice}>{deviceList}</select>;
+	};
+
 	render() {
 		return (
 			<section className="wrapper fullscreen home">
@@ -66,8 +86,9 @@ class Home extends Component {
 				<div className="form-group">
 					<Button color="primary" onClick={this.handleClick}>Scan Bluetooth</Button>
 				</div>
-				<div className="state">{this.state.devices.length ? this.state.devices[0] : "No Device Found Yet."}</div>
-				<div className="state">{this.state.readData}</div>
+				<div>
+					{this.renderDevices()}
+				</div>
 			</section>
 		);
 	}

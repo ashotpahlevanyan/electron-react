@@ -6,6 +6,7 @@ device.pairedDevices = [];
 device.connection = {};
 
 device.addDeviceToList = function(item) {
+	device.pairedDevices = [];
 	device.pairedDevices.push(item);
 };
 

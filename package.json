@@ -100,6 +100,7 @@
     "@fortawesome/fontawesome-free": "^5.4.1",
     "concurrently": "^4.0.1",
     "debug": "^4.1.0",
+    "electron-react-devtools": "^0.5.3",
     "electron-rebuild": "^1.8.4",
     "foreman": "^3.0.1",
     "jest-resolve": "^24.4.0",
