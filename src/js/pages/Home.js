@@ -17,15 +17,11 @@ class Home extends Component {
 
 		this.state = {
 			devices: '',
-			selectedDevice: ''
+			selectedAddress: ''
 		};
 
 		this.handleClick = this.handleClick.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleClick() {
-		ipcRenderer.send('list-all-devices');
 	}
 
 	componentDidMount() {
@@ -35,7 +31,7 @@ class Home extends Component {
 					console.log('devicesList', arg);
 					const {devices} = arg;
 
-					this.setState({devices: devices[0], selectedDevice: devices[0][0].address});
+					this.setState({devices: devices[0], selectedAddress: devices[0][0].address});
 				});
 
 				ipcRenderer.on('device-is-connected', (event, arg) => {
@@ -61,7 +57,23 @@ class Home extends Component {
 	}
 
 	handleChange(event) {
-		this.setState({selectedDevice: event.target.value});
+		this.setState({selectedAddress: event.target.value});
+	}
+
+	handleClick() {
+		ipcRenderer.send('list-all-devices');
+	}
+
+	handleConnect() {
+		// if(this.state.devices && this.state.devices.length) {
+		// 	const selectedDevice = this.state.devices.filter(item => item.address === this.state.selectedAddress);
+		// 	const {address, name} = selectedDevice;
+		//
+		// }
+		ipcRenderer.send('connect-to-device', {
+			address: '00-04-3e-9d-36-f4',
+			name: 'LPR_04572'
+		});
 	}
 
 	render() {
@@ -77,13 +89,25 @@ class Home extends Component {
 					{
 						!(devices && devices.length) ?
 							<div>No Device Found</div> :
-							<select name="devices" id="devices" onChange={this.handleChange} value={this.state.selectedDevice}>
+							<select name="devices"
+							        id="devices"
+							        onChange={this.handleChange}
+							        value={this.state.selectedAddress}
+							>
 								{devices.map((device) =>
 										<option key={device.address} value={device.address}>
 											{device.name} -- {device.address}
 										</option>)
 								}
 							</select>
+					}
+				</div>
+				<div>
+					<Button color="primary" onClick={this.handleConnect}>Connect to Device</Button>
+				</div>
+				<div>
+					{
+						this.state.selectedAddress
 					}
 				</div>
 			</section>

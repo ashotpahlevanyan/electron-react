@@ -17,9 +17,9 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
 	let error;
 	switch(action.type) {
-		case CONNECT_DEVICE:
-			return state;
 		case FETCH_DEVICES:
+			return state;
+		case CONNECT_DEVICE:
 			return state;
 		default:
 			return state;

@@ -26,62 +26,105 @@ export function fetchDevices() {
 	}
 }
 
-export function fetchDevicesSuccess() {
-
+export function fetchDevicesSuccess(devices) {
+	return {
+		type: FETCH_DEVICES_SUCCESS,
+		payload: devices
+	}
 }
 
-export function fetchDevicesFailure() {
-
+export function fetchDevicesFailure(error) {
+	return {
+		type: FETCH_DEVICES_FAILURE,
+		payload: error
+	}
 }
 
 export function resetDevices() {
-
+	return {
+		type: RESET_DEVICES
+	}
 }
 
-export function connectDevice() {
-
+export function connectDevice(device) {
+	return {
+		type: CONNECT_DEVICE,
+		payload: device
+	}
 }
 
-export function connectDeviceSuccess() {
-
+export function connectDeviceSuccess(connection) {
+	return {
+		type: CONNECT_DEVICE_SUCCESS,
+		payload: connection
+	}
 }
 
-export function connectDeviceFailure() {
-
+export function connectDeviceFailure(error) {
+	return {
+		type: CONNECT_DEVICE_FAILURE,
+		payload: error
+	}
 }
 
-export function disconnectDevice() {
-
+export function disconnectDevice(connection) {
+	return {
+		type: DISCONNECT_DEVICE,
+		payload: connection
+	}
 }
 
 export function disconnectDeviceSuccess() {
-
+	return {
+		type: DISCONNECT_DEVICE_SUCCESS
+	}
 }
 
-export function disconnectDeviceFailure() {
-
+export function disconnectDeviceFailure(error) {
+	return {
+		type: DISCONNECT_DEVICE_FAILURE,
+		payload: error
+	}
 }
+
 
 export function readDeviceData() {
-
+	return {
+		type: READ_DEVICE_DATA
+	}
 }
 
-export function readDeviceDataSuccess() {
-
+export function readDeviceDataSuccess(data) {
+	return {
+		type: READ_DEVICE_DATA_SUCCESS,
+		payload: data
+	}
 }
 
-export function readDeviceDataFailure() {
-
+export function readDeviceDataFailure(error) {
+	return {
+		type: READ_DEVICE_DATA_FAILURE,
+		payload: error
+	}
 }
 
-export function writeDeviceData() {
-
+export function writeDeviceData(data) {
+	return {
+		type: WRITE_DEVICE_DATA,
+		payload: data
+	}
 }
 
-export function writeDeviceDataSuccess() {
-
+export function writeDeviceDataSuccess(response) {
+	return {
+		type: WRITE_DEVICE_DATA_SUCCESS,
+		payload: response
+	}
 }
 
-export function writeDeviceDataFailure() {
-
+export function writeDeviceDataFailure(error) {
+	return {
+		type: WRITE_DEVICE_DATA_FAILURE,
+		payload: error
+	}
 }
