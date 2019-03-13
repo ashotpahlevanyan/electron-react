@@ -100,6 +100,10 @@ app.on('activate', function () {
 	}
 });
 
+
+/**
+ * IPC Main Listener Initializations
+ * */
 ipcMain.on('list-all-devices', (event, arg) => {
 	device.discoverDevices();
 	const devices = device.pairedDevices;

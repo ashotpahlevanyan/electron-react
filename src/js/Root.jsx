@@ -8,6 +8,8 @@ import Sidebar from './pages/Sidebar';
 import Home from './pages/Home';
 import Sessions from './pages/Sessions';
 import Cattlemax from './pages/Cattlemax';
+import BluetoothContainer from './containers/BluetoothContainer';
+
 import Tags from './pages/Tags';
 import Scales from './pages/Scales';
 import Settings from './pages/Settings';
@@ -28,6 +30,7 @@ const Root = ({ store }) => (
 		<Router history={history}>
 			<div>
 				<Sidebar />
+				<BluetoothContainer />
 				<div id="wrapper">
 					<Route exact path="/" component={Home} />
 					<Route path="/sessions" component={Sessions} />
