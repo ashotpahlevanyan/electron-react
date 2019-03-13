@@ -19,7 +19,6 @@ export const WRITE_DEVICE_DATA = 'WRITE_DEVICE_DATA';
 export const WRITE_DEVICE_DATA_SUCCESS = 'WRITE_DEVICE_DATA_SUCCESS';
 export const WRITE_DEVICE_DATA_FAILURE = 'WRITE_DEVICE_DATA_FAILURE';
 
-
 export function fetchDevices() {
 	return {
 		type: FETCH_DEVICES

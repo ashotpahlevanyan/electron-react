@@ -12,9 +12,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchDevices: () => {
 			dispatch(fetchDevices());
-			//.payload.then((response) => {
-			//response ? dispatch(fetchDevicesSuccess(response.data)) : dispatch(fetchDevicesFailure(response.data));
-		//});
 		}
 	}
 };

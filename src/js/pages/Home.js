@@ -3,8 +3,8 @@ import { Button } from 'reactstrap';
 import axios from "axios";
 import BluetoothContainer from '../containers/BluetoothContainer';
 
-let electron; // = setTimeout(function(){window.require('electron')}, 2000);
-let ipcRenderer; // = electron.ipcRenderer;
+let electron;
+let ipcRenderer;
 
 async function loadDeps() {
 	electron = await window.require('electron');
