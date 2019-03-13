@@ -32,7 +32,6 @@ device.connectToDevice = ({address, name}) => {
 
 			connection.on('data', (buffer) => {
 				console.log('received message:', buffer.toString());
-
 			});
 
 			// connection.write(new Buffer('Hello!', 'utf-8'), () => {

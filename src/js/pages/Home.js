@@ -14,14 +14,18 @@ async function loadDeps() {
 class Home extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			devices: '',
-			selectedDevice: {}
+			selectedDevice: ''
 		};
 
 		this.handleClick = this.handleClick.bind(this);
-		this.renderDevices = this.renderDevices.bind(this);
-		this.handleSelect = this.handleSelect.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
+
+	handleClick() {
+		ipcRenderer.send('list-all-devices');
 	}
 
 	componentDidMount() {
@@ -32,7 +36,6 @@ class Home extends Component {
 					const {devices} = arg;
 
 					this.setState({devices: devices[0], selectedDevice: devices[0][0].address});
-					console.log(this.state);
 				});
 
 				ipcRenderer.on('device-is-connected', (event, arg) => {
@@ -57,37 +60,31 @@ class Home extends Component {
 			});
 	}
 
-	handleClick() {
-		loadDeps()
-			.then(() => {
-				ipcRenderer.send('list-all-devices');
-			});
-	}
-	handleSelect(event) {
+	handleChange(event) {
 		this.setState({selectedDevice: event.target.value});
-		console.log(this.state);
 	}
-	renderDevices = () => {
-		const devices = this.state.devices;
-		if(!(devices && devices.length)) {
-			return <div>No Device Found</div>;
-		}
-		const deviceList = devices.map((device, index) => {
-			return <option key={index} value={device.address}>{device.name} -- {device.address}</option>
-		});
-		return <select name="devices" id="devices" onChange={this.handleSelect} value={this.state.selectedDevice}>{deviceList}</select>;
-	};
 
 	render() {
+		const {devices} = this.state;
 		return (
 			<section className="wrapper fullscreen home">
 				<h2>Home</h2>
 				<BluetoothContainer/>
 				<div className="form-group">
-					<Button color="primary" onClick={this.handleClick}>Scan Bluetooth</Button>
+					<Button color="primary" onClick={this.handleClick}>List Devices</Button>
 				</div>
 				<div>
-					{this.renderDevices()}
+					{
+						!(devices && devices.length) ?
+							<div>No Device Found</div> :
+							<select name="devices" id="devices" onChange={this.handleChange} value={this.state.selectedDevice}>
+								{devices.map((device) =>
+										<option key={device.address} value={device.address}>
+											{device.name} -- {device.address}
+										</option>)
+								}
+							</select>
+					}
 				</div>
 			</section>
 		);
