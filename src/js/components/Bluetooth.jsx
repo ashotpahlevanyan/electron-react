@@ -17,9 +17,7 @@ class Bluetooth extends Component {
 		this.handleConnect = this.handleConnect.bind(this);
 		this.handleDisconnect = this.handleDisconnect.bind(this);
 	}
-	componentWillMount() {
-		//ipcRenderer = initIpcRenderer();
-	}
+
 	componentDidMount() {
 		this.props.fetchDevices();
 	}
@@ -29,7 +27,7 @@ class Bluetooth extends Component {
 	}
 
 	handleConnect() {
-		//this.props.connect
+		this.props.connectDevice({name: "LPR_04572", address: "00-04-3e-9d-36-f4"});
 	}
 
 	handleDisconnect(event) {

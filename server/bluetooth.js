@@ -42,8 +42,8 @@ device.connectToDevice = ({address, name}) => {
 };
 
 
-device.disconnectFromDevice = ({address, name}) => {
-		bluetooth.Connection.abort();
+device.disconnectFromDevice = ({address, name}, cb) => {
+		bluetooth.Connection.close(cb);
 };
 
 module.exports = device;

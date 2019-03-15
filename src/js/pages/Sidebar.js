@@ -8,7 +8,7 @@ class Sidebar extends Component {
 		super(props);
 
 		this.state = {
-			closed: false
+			closed: true
 		};
 
 		this.handleToggleClick = this.handleToggleClick.bind(this);

@@ -1,6 +1,7 @@
 const electron = require('electron');
 const { ipcMain } = require('electron');
-const device = require("./server/bluetooth.js");
+const device = require('./server/bluetooth.js');
+const ipc = require('./src/js/actions/ipcActions');
 
 /*
 * Module to control application life.
@@ -103,32 +104,36 @@ app.on('activate', function () {
 /**
  * IPC Main Listener Initializations
  * */
-ipcMain.on('list-all-devices', (event, arg) => {
-	device.discoverDevices();
-	const devices = device.pairedDevices;
-	event.sender.send('all-devices-list', {devices: devices});
-});
-
-ipcMain.on('connect-to-device', (event, arg) => {
-	const {address, name} = arg;
+ipcMain.on(ipc.IPC_LIST_PAIRED_DEVICES, (event, args) => {
 	try {
-		const connection = device.connectToDevice({address, name});
-		connection.then(connectionItem => {
-			event.sender.send('device-is-connected', {connected: true, connection: connectionItem});
-		});
-	} catch(error) {
-		event.sender.send('device-not-connected', {error: error, connected: false});
+		device.discoverDevices();
+		const devices = device.pairedDevices;
+		event.sender.send(ipc.IPC_LIST_PAIRED_DEVICES_SUCCESS, {devices: devices[0]});
+	} catch (error) {
+		event.sender.send(ipc.IPC_LIST_PAIRED_DEVICES_FAILURE, {error: error});
 	}
 });
 
-ipcMain.on('disconnect-from-device', (event, arg) => {
+ipcMain.on(ipc.IPC_CONNECT_DEVICE, (event, args) => {
+	const {address, name} = {...args};
+	try {
+		const connection = device.connectToDevice({address, name});
+		connection.then(connectionItem => {
+			event.sender.send(ipc.IPC_CONNECT_DEVICE_SUCCESS, {connection: connectionItem});
+		});
+	} catch(error) {
+		event.sender.send(ipc.IPC_CONNECT_DEVICE_FAILURE, {error: error});
+	}
+});
+
+ipcMain.on(ipc.IPC_DISCONNECT_DEVICE, (event, arg) => {
 	const {address, name} = arg;
 	try {
 		const connection = device.disconnectFromDevice({address, name});
 		connection.then(connectionItem => {
-			event.sender.send('device-is-disconnected', {disconnected: true, connection: connectionItem});
+			event.sender.send(ipc.IPC_DISCONNECT_DEVICE_SUCCESS, {disconnected: true, connection: connectionItem});
 		});
 	} catch(error) {
-		event.sender.send('device-not-disconnected', {error: error, disconnected: false});
+		event.sender.send(ipc.IPC_DISCONNECT_DEVICE_FAILURE, {error: error, disconnected: false});
 	}
 });

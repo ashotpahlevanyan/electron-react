@@ -33,7 +33,7 @@ export default function(state = INITIAL_STATE, action) {
 		case CONNECT_DEVICE_SUCCESS:
 			return { ...state, connection: { connection: action.payload, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: null, loading: false } };
 		case CONNECT_DEVICE_FAILURE:
-			error = action.payload || {message: action.payload.message};
+			error = action.payload || { message: action.payload.message };
 			return { ...state, connection: { connection: null, activeDevice: null, lastDevice: {...state.connection.lastDevice}, error: error, loading: false } };
 		case DISCONNECT_DEVICE:
 			return { ...state, connection: { connection: action.payload, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: null, loading: true } };
