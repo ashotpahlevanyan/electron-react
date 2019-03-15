@@ -5,6 +5,7 @@ import {
 	fetchDevicesFailure
 } from '../actions/bluetooth';
 import Bluetooth from '../components/Bluetooth';
+import { send } from 'redux-electron-ipc';
 
 const mapStateToProps = (state) => {
 	return {
@@ -15,10 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchDevices: () => {
-			dispatch(fetchDevices()).payload
-				.then(response => {
-					console.log(response);
-				});
+			return send('list-all-devices');
 		},
 
 

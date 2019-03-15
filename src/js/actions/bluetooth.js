@@ -19,9 +19,10 @@ export const WRITE_DEVICE_DATA = 'WRITE_DEVICE_DATA';
 export const WRITE_DEVICE_DATA_SUCCESS = 'WRITE_DEVICE_DATA_SUCCESS';
 export const WRITE_DEVICE_DATA_FAILURE = 'WRITE_DEVICE_DATA_FAILURE';
 
-export function fetchDevices() {
+export function fetchDevices(event, args) {
 	return {
-		type: FETCH_DEVICES
+		type: FETCH_DEVICES,
+		payload: args
 	}
 }
 

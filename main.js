@@ -2,7 +2,6 @@ const electron = require('electron');
 const { ipcMain } = require('electron');
 const device = require("./server/bluetooth.js");
 
-
 /*
 * Module to control application life.
 * */

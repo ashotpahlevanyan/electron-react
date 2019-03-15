@@ -10,6 +10,8 @@ import Sessions from './pages/Sessions';
 import Cattlemax from './pages/Cattlemax';
 import BluetoothContainer from './containers/BluetoothContainer';
 
+
+
 import Tags from './pages/Tags';
 import Scales from './pages/Scales';
 import Settings from './pages/Settings';

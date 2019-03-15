@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import initIpcRenderer from './Dependencies';
+//import initIpcRenderer from './Dependencies';
 import LoadingSpinner from './LoadingSpinner';
 import { Alert, Button } from 'reactstrap';
 
-let ipcRenderer;
+//let ipcRenderer;
 
 class Bluetooth extends Component {
 	constructor(props) {
@@ -18,10 +18,10 @@ class Bluetooth extends Component {
 		this.handleDisconnect = this.handleDisconnect.bind(this);
 	}
 	componentWillMount() {
-		ipcRenderer = initIpcRenderer();
+		//ipcRenderer = initIpcRenderer();
 	}
 	componentDidMount() {
-		this.props.fetchDevices(ipcRenderer);
+		this.props.fetchDevices();
 	}
 
 	handleChange(event) {
