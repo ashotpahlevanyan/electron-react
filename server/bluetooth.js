@@ -1,6 +1,6 @@
 const bluetooth = require('node-bluetooth');
-
 const device = new bluetooth.DeviceINQ();
+
 
 device.pairedDevices = [];
 device.connection = {};
@@ -13,6 +13,14 @@ device.addDeviceToList = function(item) {
 device.discoverDevices = () => {
 	device.listPairedDevices(device.addDeviceToList);
 };
+
+device
+	.on('finished',  console.log.bind(console, 'finished'))
+	.on('found', function found(address, name){
+		console.log('Found: ' + address + ' with name ' + name);
+	}).scan();
+
+
 
 device.connectToDevice = ({address, name}) => {
 	device.findSerialPortChannel(address, function(channel){
