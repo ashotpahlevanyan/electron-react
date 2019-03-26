@@ -1,133 +1,165 @@
 /**
  * React Actions
  * */
-export const FETCH_DEVICES = 'FETCH_DEVICES';
-export const FETCH_DEVICES_SUCCESS = 'FETCH_DEVICES_SUCCESS';
-export const FETCH_DEVICES_FAILURE = 'FETCH_DEVICES_FAILURE';
-export const RESET_DEVICES = 'RESET_DEVICES';
+export const FETCH_PAIRED_DEVICES = 'FETCH_PAIRED_DEVICES';
+export const FETCH_PAIRED_DEVICES_SUCCESS = 'FETCH_PAIRED_DEVICES_SUCCESS';
+export const FETCH_PAIRED_DEVICES_FAILURE = 'FETCH_PAIRED_DEVICES_FAILURE';
+export const RESET_PAIRED_DEVICES = 'RESET_PAIRED_DEVICES';
 
-export const CONNECT_DEVICE = 'CONNECT_DEVICE';
-export const CONNECT_DEVICE_SUCCESS = 'CONNECT_DEVICE_SUCCESS';
-export const CONNECT_DEVICE_FAILURE = 'CONNECT_DEVICE_FAILURE';
+export const SCAN_ACTIVE_DEVICES = 'SCAN_ACTIVE_DEVICES';
+export const SCAN_ACTIVE_DEVICES_SUCCESS = 'SCAN_ACTIVE_DEVICES_SUCCESS';
+export const SCAN_ACTIVE_DEVICES_FAILURE = 'SCAN_ACTIVE_DEVICES_FAILURE';
+export const RESET_ACTIVE_DEVICES = 'RESET_ACTIVE_DEVICES';
 
-export const DISCONNECT_DEVICE = 'DISCONNECT_DEVICE';
-export const DISCONNECT_DEVICE_SUCCESS = 'DISCONNECT_DEVICE_SUCCESS';
-export const DISCONNECT_DEVICE_FAILURE = 'DISCONNECT_DEVICE_FAILURE';
+export const CONNECT_TO_DEVICE = 'CONNECT_TO_DEVICE';
+export const CONNECT_TO_DEVICE_SUCCESS = 'CONNECT_TO_DEVICE_SUCCESS';
+export const CONNECT_TO_DEVICE_FAILURE = 'CONNECT_TO_DEVICE_FAILURE';
 
-export const READ_DEVICE_DATA = 'READ_DEVICE_DATA';
-export const READ_DEVICE_DATA_SUCCESS = 'READ_DEVICE_DATA_SUCCESS';
-export const READ_DEVICE_DATA_FAILURE = 'READ_DEVICE_DATA_FAILURE';
+export const DISCONNECT_FROM_DEVICE = 'DISCONNECT_FROM_DEVICE';
+export const DISCONNECT_FROM_DEVICE_SUCCESS = 'DISCONNECT_FROM_DEVICE_SUCCESS';
+export const DISCONNECT_FROM_DEVICE_FAILURE = 'DISCONNECT_FROM_DEVICE_FAILURE';
 
-export const WRITE_DEVICE_DATA = 'WRITE_DEVICE_DATA';
-export const WRITE_DEVICE_DATA_SUCCESS = 'WRITE_DEVICE_DATA_SUCCESS';
-export const WRITE_DEVICE_DATA_FAILURE = 'WRITE_DEVICE_DATA_FAILURE';
+export const READ_DATA_FROM_DEVICE = 'READ_DATA_FROM_DEVICE';
+export const READ_DATA_FROM_DEVICE_SUCCESS = 'READ_DATA_FROM_DEVICE_SUCCESS';
+export const READ_DATA_FROM_DEVICE_FAILURE = 'READ_DATA_FROM_DEVICE_FAILURE';
 
-export function fetchDevices(event, args) {
+export const WRITE_DATA_TO_DEVICE = 'WRITE_DATA_TO_DEVICE';
+export const WRITE_DATA_TO_DEVICE_SUCCESS = 'WRITE_DATA_TO_DEVICE_SUCCESS';
+export const WRITE_DATA_TO_DEVICE_FAILURE = 'WRITE_DATA_TO_DEVICE_FAILURE';
+
+export function fetchPairedDevices(event, args) {
 	return {
-		type: FETCH_DEVICES,
+		type: FETCH_PAIRED_DEVICES,
 		payload: args
 	}
 }
 
-export function fetchDevicesSuccess(devices) {
+export function fetchPairedDevicesSuccess(devices) {
 	return {
-		type: FETCH_DEVICES_SUCCESS,
+		type: FETCH_PAIRED_DEVICES_SUCCESS,
 		payload: devices
 	}
 }
 
-export function fetchDevicesFailure(error) {
+export function fetchPairedDevicesFailure(error) {
 	return {
-		type: FETCH_DEVICES_FAILURE,
+		type: FETCH_PAIRED_DEVICES_FAILURE,
 		payload: error
 	}
 }
 
-export function resetDevices() {
+export function resetPairedDevices() {
 	return {
-		type: RESET_DEVICES
+		type: RESET_PAIRED_DEVICES
 	}
 }
 
-export function connectDevice(device) {
+
+export function scanActiveDevices(event, args) {
 	return {
-		type: CONNECT_DEVICE,
+		type: SCAN_ACTIVE_DEVICES,
+		payload: args
+	}
+}
+
+export function scanActiveDevicesSuccess(devices) {
+	return {
+		type: SCAN_ACTIVE_DEVICES_SUCCESS,
+		payload: devices
+	}
+}
+
+export function scanActiveDevicesFailure(error) {
+	return {
+		type: SCAN_ACTIVE_DEVICES_FAILURE,
+		payload: error
+	}
+}
+
+export function resetActiveDevices() {
+	return {
+		type: RESET_ACTIVE_DEVICES
+	}
+}
+
+export function connectToDevice(device) {
+	return {
+		type: CONNECT_TO_DEVICE,
 		payload: device
 	}
 }
 
-export function connectDeviceSuccess(connection) {
+export function connectToDeviceSuccess(connection) {
 	return {
-		type: CONNECT_DEVICE_SUCCESS,
+		type: CONNECT_TO_DEVICE_SUCCESS,
 		payload: connection
 	}
 }
 
-export function connectDeviceFailure(error) {
+export function connectToDeviceFailure(error) {
 	return {
-		type: CONNECT_DEVICE_FAILURE,
+		type: CONNECT_TO_DEVICE_FAILURE,
 		payload: error
 	}
 }
 
-export function disconnectDevice(connection) {
+export function disconnectFromDevice() {
 	return {
-		type: DISCONNECT_DEVICE,
-		payload: connection
+		type: DISCONNECT_FROM_DEVICE
 	}
 }
 
-export function disconnectDeviceSuccess() {
+export function disconnectFromDeviceSuccess() {
 	return {
-		type: DISCONNECT_DEVICE_SUCCESS
+		type: DISCONNECT_FROM_DEVICE_SUCCESS
 	}
 }
 
-export function disconnectDeviceFailure(error) {
+export function disconnectFromDeviceFailure(error) {
 	return {
-		type: DISCONNECT_DEVICE_FAILURE,
+		type: DISCONNECT_FROM_DEVICE_FAILURE,
 		payload: error
 	}
 }
 
 
-export function readDeviceData() {
+export function readDataFromDevice() {
 	return {
-		type: READ_DEVICE_DATA
+		type: READ_DATA_FROM_DEVICE
 	}
 }
 
-export function readDeviceDataSuccess(data) {
+export function readDataFromDeviceSuccess(data) {
 	return {
-		type: READ_DEVICE_DATA_SUCCESS,
+		type: READ_DATA_FROM_DEVICE_SUCCESS,
 		payload: data
 	}
 }
 
-export function readDeviceDataFailure(error) {
+export function readDataFromDeviceFailure(error) {
 	return {
-		type: READ_DEVICE_DATA_FAILURE,
+		type: READ_DATA_FROM_DEVICE_FAILURE,
 		payload: error
 	}
 }
 
-export function writeDeviceData(data) {
+export function writeDataToDevice(data) {
 	return {
-		type: WRITE_DEVICE_DATA,
+		type: WRITE_DATA_TO_DEVICE,
 		payload: data
 	}
 }
 
-export function writeDeviceDataSuccess(response) {
+export function writeDataToDeviceSuccess(response) {
 	return {
-		type: WRITE_DEVICE_DATA_SUCCESS,
+		type: WRITE_DATA_TO_DEVICE_SUCCESS,
 		payload: response
 	}
 }
 
-export function writeDeviceDataFailure(error) {
+export function writeDataToDeviceFailure(error) {
 	return {
-		type: WRITE_DEVICE_DATA_FAILURE,
+		type: WRITE_DATA_TO_DEVICE_FAILURE,
 		payload: error
 	}
 }

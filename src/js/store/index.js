@@ -13,39 +13,51 @@ export const history = createHistory();
 const loggerMiddleware = createLogger();
 
 const ipc = createIpc({
-	'IPC_LIST_PAIRED_DEVICES_SUCCESS' : (event, args) => dispatch => {
+	'IPC_FETCH_PAIRED_DEVICES_SUCCESS' : (event, args) => dispatch => {
 		dispatch({
-			type: 'FETCH_DEVICES_SUCCESS',
+			type: 'FETCH_PAIRED_DEVICES_SUCCESS',
 			payload: args.devices
 		});
 	},
-	'IPC_LIST_PAIRED_DEVICES_FAILURE' : (event, args) => dispatch => {
+	'IPC_FETCH_PAIRED_DEVICES_FAILURE' : (event, args) => dispatch => {
 		dispatch({
-			type: 'FETCH_DEVICES_FAILURE',
+			type: 'FETCH_PAIRED_DEVICES_FAILURE',
 			payload: args.error
 		});
 	},
-	'IPC_CONNECT_DEVICE_SUCCESS': (event, args) => dispatch => {
+	'IPC_SCAN_ACTIVE_DEVICES_SUCCESS' : (event, args) => dispatch => {
 		dispatch({
-			type: 'CONNECT_DEVICE_SUCCESS',
+			type: 'SCAN_ACTIVE_DEVICES_SUCCESS',
+			payload: args.devices
+		});
+	},
+	'IPC_SCAN_ACTIVE_DEVICES_FAILURE' : (event, args) => dispatch => {
+		dispatch({
+			type: 'SCAN_ACTIVE_DEVICES_FAILURE',
+			payload: args.error
+		});
+	},
+	'IPC_CONNECT_TO_DEVICE_SUCCESS': (event, args) => dispatch => {
+		dispatch({
+			type: 'CONNECT_TO_DEVICE_SUCCESS',
 			payload: args.connection
 		});
 	},
-	'IPC_CONNECT_DEVICE_FAILURE': (event, args) => dispatch => {
+	'IPC_CONNECT_TO_DEVICE_FAILURE': (event, args) => dispatch => {
 		dispatch({
-			type: 'CONNECT_DEVICE_FAILURE',
+			type: 'CONNECT_TO_DEVICE_FAILURE',
 			payload: args.error
 		});
 	},
-	'IPC_READ_DEVICE_DATA_SUCCESS': (event, args) => dispatch => {
+	'IPC_READ_DATA_FROM_DEVICE_SUCCESS': (event, args) => dispatch => {
 		dispatch({
-			type: 'READ_DEVICE_FAILURE',
+			type: 'READ_DATA_FROM_DEVICE_SUCCESS',
 			payload: args.data
 		});
 	},
-	'IPC_READ_DEVICE_DATA_FAILURE': (event, args) => dispatch => {
+	'IPC_READ_DATA_FROM_DEVICE_FAILURE': (event, args) => dispatch => {
 		dispatch({
-			type: 'READ_DEVICE_FAILURE',
+			type: 'READ_DATA_FROM_DEVICE_FAILURE',
 			payload: args.data
 		});
 	},

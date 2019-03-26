@@ -1,9 +1,4 @@
 import { connect } from 'react-redux';
-import {
-	fetchDevices,
-	fetchDevicesSuccess,
-	fetchDevicesFailure
-} from '../actions/bluetooth';
 import Bluetooth from '../components/Bluetooth';
 import { send } from 'redux-electron-ipc';
 const ipc = require('../actions/ipcActions');
@@ -16,17 +11,25 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchDevices: () => {
-			console.log("Dispatching fetchDevices...");
-			dispatch(send(ipc.IPC_LIST_PAIRED_DEVICES));
+		fetchPairedDevices: () => {
+			console.log("Dispatching fetchPairedDevices...");
+			dispatch(send(ipc.IPC_FETCH_PAIRED_DEVICES));
 		},
-		connectDevice: (args) => {
-			console.log("Dispatching connectDevice...", args);
-			dispatch(send(ipc.IPC_CONNECT_DEVICE), args);
+		scanActiveDevices: () => {
+			console.log("Dispatching scanActiveDevices...");
+			dispatch(send(ipc.IPC_SCAN_ACTIVE_DEVICES));
 		},
-		disconnectDevice: () => {
-			console.log("Dispatching disconnectDevice...");
-			dispatch(send(ipc.IPC_DISCONNECT_DEVICE));
+		connectToDevice: (args) => {
+			console.log("Dispatching connectToDevice...", args);
+			dispatch(send(ipc.IPC_CONNECT_TO_DEVICE), args);
+		},
+		writeDataToDevice: (args) => {
+			console.log("Dispatching writeDataToDevice...", args);
+			dispatch(send(ipc.IPC_WRITE_DATA_TO_DEVICE), args);
+		},
+		disconnectFromDevice: () => {
+			console.log("Dispatching disconnectFromDevice...");
+			dispatch(send(ipc.IPC_DISCONNECT_FROM_DEVICE));
 		},
 	}
 };

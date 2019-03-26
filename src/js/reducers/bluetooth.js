@@ -1,14 +1,16 @@
 import {
-	FETCH_DEVICES, FETCH_DEVICES_SUCCESS, FETCH_DEVICES_FAILURE, RESET_DEVICES,
-	CONNECT_DEVICE, CONNECT_DEVICE_SUCCESS, CONNECT_DEVICE_FAILURE,
-	DISCONNECT_DEVICE, DISCONNECT_DEVICE_SUCCESS, DISCONNECT_DEVICE_FAILURE,
-	READ_DEVICE_DATA, READ_DEVICE_DATA_SUCCESS, READ_DEVICE_DATA_FAILURE,
-	WRITE_DEVICE_DATA, WRITE_DEVICE_DATA_SUCCESS, WRITE_DEVICE_DATA_FAILURE
+	FETCH_PAIRED_DEVICES, FETCH_PAIRED_DEVICES_SUCCESS, FETCH_PAIRED_DEVICES_FAILURE, RESET_PAIRED_DEVICES,
+	SCAN_ACTIVE_DEVICES, SCAN_ACTIVE_DEVICES_SUCCESS, SCAN_ACTIVE_DEVICES_FAILURE, RESET_ACTIVE_DEVICES,
+	CONNECT_TO_DEVICE, CONNECT_TO_DEVICE_SUCCESS, CONNECT_TO_DEVICE_FAILURE,
+	DISCONNECT_FROM_DEVICE, DISCONNECT_FROM_DEVICE_SUCCESS, DISCONNECT_FROM_DEVICE_FAILURE,
+	READ_DATA_FROM_DEVICE, READ_DATA_FROM_DEVICE_SUCCESS, READ_DATA_FROM_DEVICE_FAILURE,
+	WRITE_DATA_TO_DEVICE, WRITE_DATA_TO_DEVICE_SUCCESS, WRITE_DATA_TO_DEVICE_FAILURE
 } from '../actions/bluetooth';
 
 const INITIAL_STATE = {
-	devicesList: {devices: [], error: null, loading: false},
-	connection: { connection: null, activeDevice: null, lastDevice: null, error: null, loading: false},
+	pairedDevicesList: {devices: [], error: null, loading: false},
+	activeDevicesList: {devices: [], error: null, loading: false},
+	connection: { status: false, connection: null, activeDevice: null, lastDevice: null, error: null, loading: false},
 	readData: {data: null, error: null, loading: false},
 	writeData: {data: null, error: null, loading: false},
 };
@@ -18,44 +20,55 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
 	let error;
 	switch(action.type) {
-		case FETCH_DEVICES:
-			return { ...state, devicesList: {devices: [], error: null, loading: true} };
-		case FETCH_DEVICES_SUCCESS:
-			return { ...state, devicesList: {devices: action.payload, error: null, loading: false} };
-		case FETCH_DEVICES_FAILURE:
+		case FETCH_PAIRED_DEVICES:
+			return { ...state, pairedDevicesList: {devices: [], error: null, loading: true} };
+		case FETCH_PAIRED_DEVICES_SUCCESS:
+			return { ...state, pairedDevicesList: {devices: action.payload, error: null, loading: false} };
+		case FETCH_PAIRED_DEVICES_FAILURE:
 			error = action.payload || {message: action.payload.message};
-			return { ...state, devicesList: {devices: [], error: error, loading: false} };
-		case RESET_DEVICES:
-			return { ...state, devicesList: {devices: [], error: null, loading: false} };
+			return { ...state, pairedDevicesList: {devices: [], error: error, loading: false} };
+		case RESET_PAIRED_DEVICES:
+			return { ...state, pairedDevicesList: {devices: [], error: null, loading: false} };
 
-		case CONNECT_DEVICE:
-			return { ...state, connection: { connection: null, activeDevice: action.payload, lastDevice: {...state.connection.lastDevice}, error: null, loading: true } };
-		case CONNECT_DEVICE_SUCCESS:
-			return { ...state, connection: { connection: action.payload, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: null, loading: false } };
-		case CONNECT_DEVICE_FAILURE:
+		case SCAN_ACTIVE_DEVICES:
+			return { ...state, activeDevicesList: {devices: [], error: null, loading: true} };
+		case SCAN_ACTIVE_DEVICES_SUCCESS:
+			return { ...state, activeDevicesList: {devices: action.payload, error: null, loading: false} };
+		case SCAN_ACTIVE_DEVICES_FAILURE:
+			error = action.payload || {message: action.payload.message};
+			return { ...state, activeDevicesList: {devices: [], error: error, loading: false} };
+		case RESET_ACTIVE_DEVICES:
+			return { ...state, activeDevicesList: {devices: [], error: null, loading: false} };
+
+		case CONNECT_TO_DEVICE:
+			return { ...state, connection: {status: state.connection.status, connection: null, activeDevice: action.payload, lastDevice: {...state.connection.lastDevice}, error: null, loading: true } };
+		case CONNECT_TO_DEVICE_SUCCESS:
+			return { ...state, connection: {status: true, connection: action.payload, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: null, loading: false } };
+		case CONNECT_TO_DEVICE_FAILURE:
 			error = action.payload || { message: action.payload.message };
-			return { ...state, connection: { connection: null, activeDevice: null, lastDevice: {...state.connection.lastDevice}, error: error, loading: false } };
-		case DISCONNECT_DEVICE:
-			return { ...state, connection: { connection: action.payload, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: null, loading: true } };
-		case DISCONNECT_DEVICE_SUCCESS:
-			return { ...state, connection: { connection: null, activeDevice: null, lastDevice: {...state.connection.activeDevice}, error: null, loading: false } };
-		case DISCONNECT_DEVICE_FAILURE:
-			error = action.payload || {message: action.payload.message};
-			return { ...state, connection: { connection: {...state.connection.connection}, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: error, loading: false } };
+			return { ...state, connection: {status: false, connection: null, activeDevice: null, lastDevice: {...state.connection.lastDevice}, error: error, loading: false } };
 
-		case READ_DEVICE_DATA:
+		case DISCONNECT_FROM_DEVICE:
+			return { ...state, connection: {status: state.connection.status, connection: action.payload, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: null, loading: true } };
+		case DISCONNECT_FROM_DEVICE_SUCCESS:
+			return { ...state, connection: {status: false, connection: null, activeDevice: null, lastDevice: {...state.connection.activeDevice}, error: null, loading: false } };
+		case DISCONNECT_FROM_DEVICE_FAILURE:
+			error = action.payload || {message: action.payload.message};
+			return { ...state, connection: {status: state.connection.status, connection: {...state.connection.connection}, activeDevice: {...state.connection.activeDevice}, lastDevice: {...state.connection.lastDevice}, error: error, loading: false } };
+
+		case READ_DATA_FROM_DEVICE:
 			return {...state, readData: {data: null, error: null, loading: true} };
-		case READ_DEVICE_DATA_SUCCESS:
+		case READ_DATA_FROM_DEVICE_SUCCESS:
 			return {...state, readData: {data: action.payload, error: null, loading: false} };
-		case READ_DEVICE_DATA_FAILURE:
+		case READ_DATA_FROM_DEVICE_FAILURE:
 			error = action.payload || {message: action.payload.message};
 			return {...state, readData: {data: null, error: error, loading: false} };
 
-		case WRITE_DEVICE_DATA:
+		case WRITE_DATA_TO_DEVICE:
 			return {...state, writeData: {data: action.payload, error: null, loading: true} };
-		case WRITE_DEVICE_DATA_SUCCESS:
+		case WRITE_DATA_TO_DEVICE_SUCCESS:
 			return {...state, writeData: {data: null, error: null, loading: false} };
-		case WRITE_DEVICE_DATA_FAILURE:
+		case WRITE_DATA_TO_DEVICE_FAILURE:
 			error = action.payload || {message: action.payload.message};
 			return {...state, writeData: {data: null, error: error, loading: false} };
 
