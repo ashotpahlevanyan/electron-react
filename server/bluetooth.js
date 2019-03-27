@@ -37,34 +37,31 @@ device.scanActiveDevices = function(event, args) {
 		.scan();
 };
 
-device.connectToDevice = (event, {address, name}) => {
+device.connectToDevice = function(event, args){
+	const {address} = args.device;
 	device.findSerialPortChannel(address, function(channel){
-		console.log(`Found RFCOMM channel for serial port on ${name}: `, channel);
+		event.sender.send(ipc.IPC_FIND_SERIAL_PORT_CHANNEL_SUCCESS, {connection: {...args, channel : channel}});
+		try {
+			bluetooth.connect(address, channel, function(error, connection){
+				if(error) {
+					console.log(error);
+					return event.sender.send(ipc.IPC_CONNECT_TO_DEVICE_FAILURE, {error: error});
+				}
+				device.connection = connection;
+				event.sender.send(ipc.IPC_CONNECT_TO_DEVICE_SUCCESS, {connection: connection});
+				connection.delimiter = Buffer.from('\n', 'utf-8');
 
-		bluetooth.connect(address, channel, function(error, connection){
-			if(error) {
-				console.log(error);
-				return event.sender.send(ipc.IPC_CONNECT_TO_DEVICE_FAILURE, {error: error});
-			}
+				connection.on('data', (buffer) => {
+					let bufferString = buffer.toString('utf-8');
+					event.sender.send(ipc.IPC_READ_DATA_FROM_DEVICE_SUCCESS, {data: bufferString});
+				});
 
-			device.connection = connection;
-
-			console.log(
-				`Connection Successful: {
-				name: ${name},
-				address : ${address},
-				channel: ${channel},
-				connection: ${connection}
-				}`
-			);
-
-			connection.on('data', (buffer) => {
-				let bufferString = buffer.toString();
-				console.log('received message:', bufferString);
-				event.sender.send(ipc.IPC_READ_DATA_FROM_DEVICE_SUCCESS, {data: bufferString});
 			});
-
-		});
+		} catch (error) {
+				device.connection = null;
+				device.activeDevices = [];
+				event.sender.send(ipc.IPC_DISCONNECT_FROM_DEVICE_SUCCESS, {error: error});
+		}
 	});
 };
 
@@ -79,10 +76,15 @@ device.writeDataToDevice = function(event, data) {
 };
 
 
-device.disconnectFromDevice = ({address, name}, cb = function() {
-
-}) => {
-		bluetooth.Connection.close(cb);
+device.disconnectFromDevice = function(event, args) {
+		try {
+			device.connection.close(function cb() {
+				event.sender.send(ipc.IPC_DISCONNECT_FROM_DEVICE_SUCCESS, {error: {}});
+				device.connection = null;
+			});
+		} catch (error) {
+			event.sender.send(ipc.IPC_DISCONNECT_FROM_DEVICE_FAILURE, {error: error});
+		}
 };
 
 module.exports = device;

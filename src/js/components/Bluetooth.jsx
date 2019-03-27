@@ -47,7 +47,11 @@ class Bluetooth extends Component {
 	}
 
 	handleConnect() {
-		this.props.connectToDevice({name: "LPR_04572", address: "00-04-3e-9d-36-f4"});
+		const device = {
+			address: "00-04-3e-9d-36-f4",
+			name: "LPR_04572"
+		};
+		this.props.connectToDevice(device);
 	}
 
 	handleDisconnect() {
@@ -108,7 +112,8 @@ class Bluetooth extends Component {
 		);
 	}
 
-	renderConnection(connectionStatus = false) {
+	renderConnection(connection) {
+		const {connectionStatus} = connection;
 		// const {connection, activeDevice, lastDevice, error, loading} = conn;
 		// if(loading) {
 		// 	return <LoadingSpinner color='info' size='lg'/> ;
@@ -130,22 +135,28 @@ class Bluetooth extends Component {
 	}
 
 	renderReadData(readData) {
-
+		const {data} = readData;
+		return (
+			<div>
+				<h1>Data Read from Scanner</h1>
+				<h2>{data}</h2>
+			</div>
+		);
 	}
 
 	renderWriteData(writeData) {
 	}
 
 	render() {
-		const { pairedDevicesList, activeDevicesList, connectionStatus, readData, writeData } = this.props.bluetooth;
-		console.log( pairedDevicesList, activeDevicesList, connectionStatus, readData, writeData );
+		const { pairedDevicesList, activeDevicesList, connection, readData, writeData } = this.props.bluetooth;
+		console.log( pairedDevicesList, activeDevicesList, connection, readData, writeData );
 
 		return (
 			<div className="container">
 				<div>Bluetooth</div>
 				{this.renderPairedDevicesList(pairedDevicesList)}
 				{this.renderActiveDevicesList(activeDevicesList)}
-				{this.renderConnection(connectionStatus)}
+				{this.renderConnection(connection)}
 				{this.renderReadData(readData)}
 				{this.renderWriteData(writeData)}
 			</div>

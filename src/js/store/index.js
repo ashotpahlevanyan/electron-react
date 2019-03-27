@@ -37,9 +37,21 @@ const ipc = createIpc({
 			payload: args.error
 		});
 	},
+	'IPC_CONNECT_TO_DEVICE': (event, args) => dispatch => {
+		dispatch({
+			type: 'CONNECT_TO_DEVICE',
+			payload: args.device
+		});
+	},
 	'IPC_CONNECT_TO_DEVICE_SUCCESS': (event, args) => dispatch => {
 		dispatch({
 			type: 'CONNECT_TO_DEVICE_SUCCESS',
+			payload: args.connection
+		});
+	},
+	'IPC_FIND_SERIAL_PORT_CHANNEL_SUCCESS': (event, args) => dispatch => {
+		dispatch({
+			type: 'FIND_SERIAL_PORT_CHANNEL_SUCCESS',
 			payload: args.connection
 		});
 	},
@@ -59,6 +71,18 @@ const ipc = createIpc({
 		dispatch({
 			type: 'READ_DATA_FROM_DEVICE_FAILURE',
 			payload: args.data
+		});
+	},
+	'IPC_DISCONNECT_FROM_DEVICE_SUCCESS': (event, args) => dispatch => {
+		dispatch({
+			type: 'DISCONNECT_FROM_DEVICE_SUCCESS',
+			payload: args
+		});
+	},
+	'IPC_DISCONNECT_FROM_DEVICE_FAILURE': (event, args) => dispatch => {
+		dispatch({
+			type: 'DISCONNECT_FROM_DEVICE_FAILURE',
+			payload: args
 		});
 	},
 });

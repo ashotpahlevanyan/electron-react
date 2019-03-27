@@ -14,6 +14,7 @@ export const RESET_ACTIVE_DEVICES = 'RESET_ACTIVE_DEVICES';
 export const CONNECT_TO_DEVICE = 'CONNECT_TO_DEVICE';
 export const CONNECT_TO_DEVICE_SUCCESS = 'CONNECT_TO_DEVICE_SUCCESS';
 export const CONNECT_TO_DEVICE_FAILURE = 'CONNECT_TO_DEVICE_FAILURE';
+export const FIND_SERIAL_PORT_CHANNEL_SUCCESS = 'FIND_SERIAL_PORT_CHANNEL_SUCCESS';
 
 export const DISCONNECT_FROM_DEVICE = 'DISCONNECT_FROM_DEVICE';
 export const DISCONNECT_FROM_DEVICE_SUCCESS = 'DISCONNECT_FROM_DEVICE_SUCCESS';
@@ -92,6 +93,13 @@ export function connectToDevice(device) {
 export function connectToDeviceSuccess(connection) {
 	return {
 		type: CONNECT_TO_DEVICE_SUCCESS,
+		payload: connection
+	}
+}
+
+export function findSerialPortChannelSuccess(connection) {
+	return {
+		type: FIND_SERIAL_PORT_CHANNEL_SUCCESS,
 		payload: connection
 	}
 }

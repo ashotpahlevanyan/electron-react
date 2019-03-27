@@ -19,13 +19,13 @@ const mapDispatchToProps = (dispatch) => {
 			console.log("Dispatching scanActiveDevices...");
 			dispatch(send(ipc.IPC_SCAN_ACTIVE_DEVICES));
 		},
-		connectToDevice: (args) => {
-			console.log("Dispatching connectToDevice...", args);
-			dispatch(send(ipc.IPC_CONNECT_TO_DEVICE), args);
+		connectToDevice: (device) => {
+			console.log("Dispatching connectToDevice...", device);
+			dispatch(send(ipc.IPC_CONNECT_TO_DEVICE, {device:device}));
 		},
-		writeDataToDevice: (args) => {
-			console.log("Dispatching writeDataToDevice...", args);
-			dispatch(send(ipc.IPC_WRITE_DATA_TO_DEVICE), args);
+		writeDataToDevice: (data) => {
+			console.log("Dispatching writeDataToDevice...", data);
+			dispatch(send(ipc.IPC_WRITE_DATA_TO_DEVICE, data));
 		},
 		disconnectFromDevice: () => {
 			console.log("Dispatching disconnectFromDevice...");
