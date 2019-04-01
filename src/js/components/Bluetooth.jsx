@@ -85,7 +85,7 @@ class Bluetooth extends Component {
 							}
 						</select>
 					</div> :
-					<div className="warning">No Paired Device Found.</div>}
+					<div className="warning">No Paired Devices Found.</div>}
 			</div>
 		);
 	}
@@ -116,7 +116,7 @@ class Bluetooth extends Component {
 							}
 						</select>
 					</div> :
-					<div className="warning">No Active Device Found</div>}
+					<div className="warning">No Active Devices Found.</div>}
 			</div>
 		);
 	}

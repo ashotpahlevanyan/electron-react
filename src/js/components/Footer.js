@@ -6,8 +6,8 @@ class Footer extends Component {
 			<footer id="footer" className="wrapper footer">
 				<div className="inner">
 					<ul className="menu">
-						<li>&copy; A Product of CattleMax.</li>
-						<li>All rights reserved.</li>
+						<li>&copy; <span className="text long">A Product of CattleMax.</span><span className="text short">CM</span></li>
+						<li><span className="text long">All rights reserved.</span></li>
 					</ul>
 				</div>
 			</footer>

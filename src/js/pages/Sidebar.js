@@ -64,12 +64,13 @@ class Sidebar extends Component {
 					<FontAwesomeIcon className="faicon" icon={this.state.closed ? "bars" : "chevron-left"}/>
 				</button>
 				<div className="inner">
-					<NavLink to="/" className="logo"><img src="./images/TagMax-2x.png" alt="Logo"/></NavLink>
+					<NavLink to="/" className="logo full"><img src="./images/TagMax-2x.png" alt="Logo"/></NavLink>
+					<NavLink to="/" className="logo icon"><img src="./images/titleLogo.png" alt="Logo"/></NavLink>
 					<nav>
 						<ul>
-							<li><NavLink to="/bluetooth" activeClassName="active"><FontAwesomeIcon icon={["fab", "bluetooth"]}/>Bluetooth</NavLink></li>
-							<li><NavLink to="/sessions" activeClassName="active"><FontAwesomeIcon icon="list-alt"/>Sessions</NavLink></li>
-							<li><NavLink to="/cattlemax" activeClassName="active"><FontAwesomeIcon icon="home"/>CattleMax</NavLink></li>
+							<li><NavLink to="/bluetooth" activeClassName="active"><FontAwesomeIcon icon={["fab", "bluetooth"]}/><span className="text">Bluetooth</span></NavLink></li>
+							<li><NavLink to="/sessions" activeClassName="active"><FontAwesomeIcon icon="list-alt"/><span className="text">Sessions</span></NavLink></li>
+							<li><NavLink to="/cattlemax" activeClassName="active"><FontAwesomeIcon icon="home"/><span className="text">CattleMax</span></NavLink></li>
 							{/*<li><NavLink to="/tags" activeClassName="active"><FontAwesomeIcon icon="shopping-cart"/>Shop CattleTags.com</NavLink></li>
 							<li><NavLink to="/scales" activeClassName="active"><FontAwesomeIcon icon="shopping-cart"/>Shop CattleScales.com</NavLink></li>
 							<li><NavLink to="/settings" activeClassName="active"><FontAwesomeIcon icon="cog"/>Settings</NavLink></li>
