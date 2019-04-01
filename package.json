@@ -7,6 +7,8 @@
     "4": "0.0.0",
     "@babel/core": "7.1.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-brands-svg-icons": "^5.8.1",
+    "@fortawesome/free-regular-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@svgr/webpack": "2.4.1",
@@ -100,7 +102,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.4.1",
+    "@fortawesome/fontawesome-free": "^5.8.1",
     "concurrently": "^4.0.1",
     "debug": "^4.1.0",
     "electron-react-devtools": "^0.5.3",

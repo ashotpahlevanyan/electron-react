@@ -1,0 +1,47 @@
+.bluetooth-wrapper {
+  background-color: $colorCoolGreenDark;
+  text-align: left;
+  .container-fluid {
+    padding-top: 60px;
+    padding-bottom: 20px;
+    width: 100%;
+  }
+  .itemWrapper {
+    border: 1px solid $colorWhite;
+    @include border-radius(5px);
+    padding: 20px 15px;
+    background-color: $colorCoolGreen;
+    &.itemWrapper {
+      margin-top: 20px;
+    }
+  }
+  .header {
+    color: $colorWhite;
+  }
+  .pairedDevices, .activeDevices {
+    margin-top: 10px;
+  }
+  h3 {
+    color: $colorWhite;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .connected {
+    color: $colorLightBlueTwo;
+  }
+  .disconnected {
+    color: $colorLightOrangeTwo;
+  }
+  .warning {
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    color: $colorWhite;
+    background-color: grey;
+    @include border-radius(5px);
+  }
+  .btn {
+    font-weight: bold;
+  }
+
+}

@@ -23,23 +23,24 @@ class Bluetooth extends Component {
 			selectedActiveAddress: ''
 		};
 
-		this.handleChange = this.handleChange.bind(this);
+		this.handlePairedChange = this.handlePairedChange.bind(this);
 		this.handleActiveChange = this.handleActiveChange.bind(this);
 		this.handleConnect = this.handleConnect.bind(this);
 		this.handleDisconnect = this.handleDisconnect.bind(this);
+		this.handleFetchPairedDevices = this.handleFetchPairedDevices.bind(this);
 		this.handleScanActiveDevices = this.handleScanActiveDevices.bind(this);
 	}
 
-	componentDidMount() {
-		this.props.fetchPairedDevices();
-	}
-
-	handleChange(event) {
+	handlePairedChange(event) {
 		this.setState({selectedAddress: event.target.value});
 	}
 
 	handleActiveChange(event) {
 		this.setState({selectedActiveAddress: event.target.value});
+	}
+
+	handleFetchPairedDevices() {
+		this.props.fetchPairedDevices();
 	}
 
 	handleScanActiveDevices() {
@@ -66,21 +67,25 @@ class Bluetooth extends Component {
 		}
 
 		return (
-			<div className="devices container">
-				<div>Paired Device List</div>
+			<div className="itemWrapper">
+				<Button color="info" onClick={this.handleFetchPairedDevices}>Fetch Paired Devices</Button>
 				{(devices.devices && devices.devices.length) ?
-					<select name="devices"
-					        id="devices"
-					        onChange={this.handleChange}
-					        value={this.state.selectedAddress}
-					>
-						{devices.devices.map((device) =>
-							<option key={device.address} value={device.address}>
-								{device.name} -- {device.address}
-							</option>)
-						}
-					</select>  :
-					<div>No Device Found</div>}
+					<div className="pairedDevices">
+						<h3>Paired Devices</h3>
+						<select name="devices"
+						        id="devices"
+						        className="form-control"
+						        onChange={this.handlePairedChange}
+						        value={this.state.selectedAddress}
+						>
+							{devices.devices.map((device) =>
+								<option key={device.address} value={device.address}>
+									{device.name} -- {device.address}
+								</option>)
+							}
+						</select>
+					</div> :
+					<div className="warning">No Paired Device Found.</div>}
 			</div>
 		);
 	}
@@ -93,43 +98,36 @@ class Bluetooth extends Component {
 		}
 
 		return (
-			<div className="devices container">
-				<div>Active Device List</div>
+			<div className="itemWrapper">
+				<Button color="info" onClick={this.handleScanActiveDevices}>Scan Active Devices</Button>
 				{(devices.devices && devices.devices.length) ?
-					<select name="activeDevices"
-					        id="activeDevices"
-					        onChange={this.handleActiveChange}
-					        value={this.state.selectedAddress}
-					>
-						{devices.devices.map((device) =>
-							<option key={device.address} value={device.address}>
-								{device.name} -- {device.address}
-							</option>)
-						}
-					</select>  :
-					<div>No Device Found</div>}
+					<div className="activeDevices">
+						<h3>Active Devices</h3>
+						<select name="activeDevices"
+						        id="activeDevices"
+						        className="form-control"
+						        onChange={this.handleActiveChange}
+						        value={this.state.selectedAddress}
+						>
+							{devices.devices.map((device) =>
+								<option key={device.address} value={device.address}>
+									{device.name} -- {device.address}
+								</option>)
+							}
+						</select>
+					</div> :
+					<div className="warning">No Active Device Found</div>}
 			</div>
 		);
 	}
 
 	renderConnection(connection) {
-		const {connectionStatus} = connection;
-		// const {connection, activeDevice, lastDevice, error, loading} = conn;
-		// if(loading) {
-		// 	return <LoadingSpinner color='info' size='lg'/> ;
-		// } else if(error) {
-		// 	return <Alert color='danger' className='pinned'>{`Error: ${error.message}`}</Alert> ;
-		// }
+		const {status} = connection;
 		return (
-			<div className="devices container">
-				{/*<div>Connection</div><br/>
-				<div>{connection}</div>
-				<div>{activeDevice}</div>
-				<div>{lastDevice}</div>*/}
-				<div><Button color="primary" onClick={this.handleScanActiveDevices}>Scan Active Devices</Button></div>
-				<div>{connectionStatus ? 'Device IS Connected' : 'Device NOT Connected'}</div>
-				<Button color="info" onClick={this.handleConnect}>Connect</Button>{' '}
-				<Button color="danger" onClick={this.handleDisconnect}>Disconnect</Button>
+			<div className="itemWrapper">
+				<Button color="success" className="col-xs-6" onClick={this.handleConnect}>Connect</Button>{' '}
+				<Button color="danger" className="col-xs-6" onClick={this.handleDisconnect}>Disconnect</Button>
+				<h3 className={status ? "connected" : "disconnected"}>{status ? 'Device IS Connected' : 'Device NOT Connected'}</h3>
 			</div>
 		);
 	}
@@ -137,9 +135,9 @@ class Bluetooth extends Component {
 	renderReadData(readData) {
 		const {data} = readData;
 		return (
-			<div>
-				<h1>Data Read from Scanner</h1>
-				<h2>{data}</h2>
+			<div className="itemWrapper">
+				<h3>Data Read from Scanner</h3>
+				<h3 className={data ? "connected" : "disconnected"}>{data ? data : "No Data Read"}</h3>
 			</div>
 		);
 	}
@@ -149,16 +147,19 @@ class Bluetooth extends Component {
 
 	render() {
 		const { pairedDevicesList, activeDevicesList, connection, readData, writeData } = this.props.bluetooth;
-		console.log( pairedDevicesList, activeDevicesList, connection, readData, writeData );
+		const {status} = connection;
+		console.log( pairedDevicesList, activeDevicesList, connection, readData, writeData, status );
 
 		return (
-			<div className="container">
-				<div>Bluetooth</div>
-				{this.renderPairedDevicesList(pairedDevicesList)}
-				{this.renderActiveDevicesList(activeDevicesList)}
-				{this.renderConnection(connection)}
-				{this.renderReadData(readData)}
-				{this.renderWriteData(writeData)}
+			<div className="bluetooth-wrapper">
+				<div className="container-fluid">
+					<h2 className="header">Bluetooth Interaction</h2>
+					{this.renderPairedDevicesList(pairedDevicesList)}
+					{this.renderActiveDevicesList(activeDevicesList)}
+					{this.renderConnection(connection)}
+					{this.renderReadData(readData)}
+					{this.renderWriteData(writeData)}
+				</div>
 			</div>
 		);
 	}

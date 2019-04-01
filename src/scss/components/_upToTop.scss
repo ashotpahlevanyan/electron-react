@@ -6,7 +6,7 @@
   line-height: 1.2;
   border-radius: 5px;
   border: none;
-  background-color: $normalBlue;
+  background-color: $colorNormalBlue;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
@@ -18,8 +18,8 @@
 .up:hover,
 .up:active,
 .up:focus {
-  color: $lightBlue;
-  background-color: $darkBlue;
+  color: $colorLightBlue;
+  background-color: $colorDarkBlue;
   text-decoration: none;
 }
 

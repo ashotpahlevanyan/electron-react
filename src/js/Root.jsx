@@ -32,9 +32,10 @@ const Root = ({ store }) => (
 		<Router history={history}>
 			<div>
 				<Sidebar />
-				<BluetoothContainer />
 				<div id="wrapper">
 					<Route exact path="/" component={Home} />
+					<Route path="/bluetooth" component={BluetoothContainer} />
+					<Route path="/home" component={Home} />
 					<Route path="/sessions" component={Sessions} />
 					<Route path="/cattlemax" component={Cattlemax} />
 					{/*<Route path="/tags" component={Tags} />

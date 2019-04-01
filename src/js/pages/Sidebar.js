@@ -28,6 +28,8 @@ class Sidebar extends Component {
 					<NavLink to="/" className="logo"><img src="./images/TagMax-2x.png" alt="Logo"/></NavLink>
 					<nav>
 						<ul>
+							<li><NavLink to="/" activeClassName="active"><FontAwesomeIcon icon="home"/>Home</NavLink></li>
+							<li><NavLink to="/bluetooth" activeClassName="active"><FontAwesomeIcon icon={["fab", "bluetooth"]}/>Bluetooth</NavLink></li>
 							<li><NavLink to="/sessions" activeClassName="active"><FontAwesomeIcon icon="list-alt"/>Sessions</NavLink></li>
 							<li><NavLink to="/cattlemax" activeClassName="active"><FontAwesomeIcon icon="home"/>CattleMax</NavLink></li>
 							{/*<li><NavLink to="/tags" activeClassName="active"><FontAwesomeIcon icon="shopping-cart"/>Shop CattleTags.com</NavLink></li>

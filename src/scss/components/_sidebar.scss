@@ -15,7 +15,7 @@
       right: auto;
       left: 20px;
       top: 10px;
-      background-color: $brandRed;
+      background-color: $colorBrandRed;
       .faicon {
         color: $colorWhite;
       }
@@ -26,9 +26,10 @@
   left: 0;
   bottom: 0;
   padding: 10px 0;
-  width: 200px;
+  width: 220px;
   .logo {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     padding: 10px;
     display: block;
     cursor: pointer;
@@ -46,16 +47,17 @@
         position: relative;
         display: block;
         padding: 15px 15px 15px 50px;
-        font-size: 14px;
+        font-size: $fz18;
         line-height: 1.2;
         color: $colorWhite;
         text-decoration: none;
         &:hover, &:focus {
-          @extend %bg-color-orange-900;
+          @extend %bg-color-teal-500; //%bg-color-orange-900;
         }
         &.active {
-          @extend %bg-color-orange-900;
-          @extend %color-cyan-a200;
+          @extend %bg-color-teal-500;
+          //@extend %bg-color-teal-500;
+          //@extend %color-cyan-a200;
         }
         .svg-inline--fa {
           position: absolute;
@@ -74,11 +76,11 @@
     width: 40px;
     height: 40px;
     padding: 0;
-    border: 2px solid $brandRed;
+    border: 2px solid $colorBrandRed;
     @include border-radius(3px);
     &:active, &:focus {
       outline: none;
-      border: 2px solid $brandRed;
+      border: 2px solid $colorBrandRed;
     }
     background-color: $colorWhite;
     img {
@@ -87,7 +89,7 @@
     }
     .faicon {
       font-size: 22px;
-      color: $brandRed;
+      color: $colorBrandRed;
     }
   }
 }
