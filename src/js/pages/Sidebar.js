@@ -13,10 +13,49 @@ class Sidebar extends Component {
 
 		this.handleToggleClick = this.handleToggleClick.bind(this);
 	}
+
+	componentDidMount() {
+		//window.addEventListener('click', this.handleToggleClick);
+	}
+	componentWillUnmount() {
+		//window.removeEventListener('click', this.handleToggleClick);
+	}
+
+	// function getClosest(elem, selector) {
+	//
+	// 	// Element.matches() polyfill
+	// 	if (!Element.prototype.matches) {
+	// 		Element.prototype.matches =
+	// 			Element.prototype.matchesSelector ||
+	// 			Element.prototype.mozMatchesSelector ||
+	// 			Element.prototype.msMatchesSelector ||
+	// 			Element.prototype.oMatchesSelector ||
+	// 			Element.prototype.webkitMatchesSelector ||
+	// 			function(s) {
+	// 				var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+	// 					i = matches.length;
+	// 				while (--i >= 0 && matches.item(i) !== this) {}
+	// 				return i > -1;
+	// 			};
+	// 	}
+	//
+	// 	// Get the closest matching element
+	// 	for ( ; elem && elem !== document; elem = elem.parentNode ) {
+	// 		if ( elem.matches( selector ) ) return elem;
+	// 	}
+	// 	return null;
+	//
+	// }
+
 	handleToggleClick(e) {
 		e.preventDefault();
-		this.setState({closed: !this.state.closed});
+		// if (!e.target.classList.contains('sidebar')) {
+		// 	this.setState({closed: true});
+		// } else {
+			this.setState({closed: !this.state.closed});
+		// }
 	}
+
 	render() {
 		return(
 			<section id="sidebar" className={this.state.closed ? "sidebar closed" : "sidebar"}>
@@ -28,7 +67,6 @@ class Sidebar extends Component {
 					<NavLink to="/" className="logo"><img src="./images/TagMax-2x.png" alt="Logo"/></NavLink>
 					<nav>
 						<ul>
-							<li><NavLink to="/" activeClassName="active"><FontAwesomeIcon icon="home"/>Home</NavLink></li>
 							<li><NavLink to="/bluetooth" activeClassName="active"><FontAwesomeIcon icon={["fab", "bluetooth"]}/>Bluetooth</NavLink></li>
 							<li><NavLink to="/sessions" activeClassName="active"><FontAwesomeIcon icon="list-alt"/>Sessions</NavLink></li>
 							<li><NavLink to="/cattlemax" activeClassName="active"><FontAwesomeIcon icon="home"/>CattleMax</NavLink></li>

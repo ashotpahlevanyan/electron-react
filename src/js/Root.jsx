@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
@@ -30,10 +30,10 @@ const history = createBrowserHistory();
 const Root = ({ store }) => (
 	<Provider store={store}>
 		<Router history={history}>
-			<div>
+			<Fragment>
 				<Sidebar />
-				<div id="wrapper">
-					<Route exact path="/" component={Home} />
+				<div id="wrapper" className="sidebarWrapper">
+					<Route exact path="/" component={BluetoothContainer} />
 					<Route path="/bluetooth" component={BluetoothContainer} />
 					<Route path="/home" component={Home} />
 					<Route path="/sessions" component={Sessions} />
@@ -44,7 +44,7 @@ const Root = ({ store }) => (
 					<Route path="/help" component={Help} />*/}
 				</div>
 				<UpToTop />
-			</div>
+			</Fragment>
 		</Router>
 	</Provider>
 );

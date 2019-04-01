@@ -1,9 +1,10 @@
 .bluetooth-wrapper {
   background-color: $colorCoolGreenDark;
   text-align: left;
+  width: calc(100vw - 60px);
+  float: right;
+  height: 100vh;
   .container-fluid {
-    padding-top: 60px;
-    padding-bottom: 20px;
     width: 100%;
   }
   .itemWrapper {

@@ -1,14 +1,17 @@
 .fullscreen {
-  width: 100vw;
+  width: calc(100vw - 60px);
   min-height: 100vh;
-  padding: 60px 20px 60px 200px;
+  float: right;
+  //padding: 60px 20px 60px 200px;
 }
 .container {
   padding: 20px;
 }
 
-.wrapper {
-  text-align: center;
+.sidebarWrapper {
+  float: right;
+
+  //text-align: center;
 }
 .home {
   @extend %bg-color-lime-200;
