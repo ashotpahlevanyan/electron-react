@@ -48,11 +48,14 @@ class Bluetooth extends Component {
 	}
 
 	handleConnect() {
-		const device = {
-			address: "00-04-3e-9d-36-f4",
-			name: "LPR_04572"
-		};
-		this.props.connectToDevice(device);
+		const {pairedDevicesList} = this.props.bluetooth;
+		const {devices} = pairedDevicesList;
+		if(devices.length) {
+			const activeDevice = devices.filter((device) => (device.address === this.state.selectedAddress));
+			if(activeDevice[0] && activeDevice[0].address !== '' ) {
+				this.props.connectToDevice(activeDevice[0]);
+			}
+		}
 	}
 
 	handleDisconnect() {
@@ -107,7 +110,7 @@ class Bluetooth extends Component {
 						        id="activeDevices"
 						        className="form-control"
 						        onChange={this.handleActiveChange}
-						        value={this.state.selectedAddress}
+						        value={this.state.selectedActiveAddress}
 						>
 							{devices.devices.map((device) =>
 								<option key={device.address} value={device.address}>
