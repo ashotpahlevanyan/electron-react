@@ -12,48 +12,28 @@ class Sidebar extends Component {
 		};
 
 		this.handleToggleClick = this.handleToggleClick.bind(this);
+		this.handleBodyClick = this.handleBodyClick.bind(this);
 	}
 
 	componentDidMount() {
-		//window.addEventListener('click', this.handleToggleClick);
+		window.addEventListener('click', this.handleBodyClick);
 	}
 	componentWillUnmount() {
-		//window.removeEventListener('click', this.handleToggleClick);
+		window.removeEventListener('click', this.handleBodyClick);
 	}
-
-	// function getClosest(elem, selector) {
-	//
-	// 	// Element.matches() polyfill
-	// 	if (!Element.prototype.matches) {
-	// 		Element.prototype.matches =
-	// 			Element.prototype.matchesSelector ||
-	// 			Element.prototype.mozMatchesSelector ||
-	// 			Element.prototype.msMatchesSelector ||
-	// 			Element.prototype.oMatchesSelector ||
-	// 			Element.prototype.webkitMatchesSelector ||
-	// 			function(s) {
-	// 				var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-	// 					i = matches.length;
-	// 				while (--i >= 0 && matches.item(i) !== this) {}
-	// 				return i > -1;
-	// 			};
-	// 	}
-	//
-	// 	// Get the closest matching element
-	// 	for ( ; elem && elem !== document; elem = elem.parentNode ) {
-	// 		if ( elem.matches( selector ) ) return elem;
-	// 	}
-	// 	return null;
-	//
-	// }
-
 	handleToggleClick(e) {
 		e.preventDefault();
-		// if (!e.target.classList.contains('sidebar')) {
-		// 	this.setState({closed: true});
-		// } else {
-			this.setState({closed: !this.state.closed});
-		// }
+		this.setState({closed: !this.state.closed});
+	}
+
+	handleBodyClick(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		if(!e.target.closest("#sidebar")) {
+			this.setState({closed: true});
+		} else {
+
+		}
 	}
 
 	render() {

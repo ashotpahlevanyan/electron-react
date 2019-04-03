@@ -9,7 +9,7 @@ const ipc = require('../src/js/actions/ipcActions');
 device.pairedDevices = [];
 device.activeDevices = [];
 device.connection = {};
-
+let dataRead = '';
 /**
  * Device Helper INNER Functions
  * */
@@ -53,7 +53,17 @@ device.connectToDevice = function(event, args){
 
 				connection.on('data', (buffer) => {
 					let bufferString = buffer.toString('utf-8');
-					event.sender.send(ipc.IPC_READ_DATA_FROM_DEVICE_SUCCESS, {data: bufferString});
+					if(bufferString.length === 25) {
+						dataRead = bufferString;
+						event.sender.send(ipc.IPC_READ_DATA_FROM_DEVICE_SUCCESS, {data: dataRead});
+						dataRead = '';
+					} else {
+						dataRead += bufferString;
+						if(dataRead.length === 25) {
+							event.sender.send(ipc.IPC_READ_DATA_FROM_DEVICE_SUCCESS, {data: dataRead});
+							dataRead = '';
+						}
+					}
 				});
 
 			});
