@@ -1,6 +1,6 @@
 const electron = require('electron');
 const { ipcMain } = require('electron');
-const device = require('./server/bluetooth.js');
+const device = require('./bluetooth');
 const ipc = require('./src/js/actions/ipcActions');
 
 /*
@@ -29,7 +29,14 @@ function createWindow() {
 	/*
 	* Create the browser window.
 	* */
-	mainWindow = new BrowserWindow({width: 1100, height: 800, experimentalFeatures: true });
+	mainWindow = new BrowserWindow({
+		width: 1100,
+		height: 800,
+		experimentalFeatures: true,
+		webPreferences: {
+			nodeIntegration: true
+		}
+	});
 	let contents = mainWindow.webContents;
 	contents.executeJavaScript('console.log(this)')
 		.then(console.log)
@@ -40,7 +47,7 @@ function createWindow() {
 	* mainWindow.loadURL('http://localhost:3000');
 	* */
 	const startUrl = process.env.ELECTRON_START_URL || url.format({
-			pathname: path.join(__dirname, '/../build/index.html'),
+			pathname: path.join(__dirname, '/public/index.html'),
 			protocol: 'file:',
 			slashes: true
 		});
