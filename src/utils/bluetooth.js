@@ -1,6 +1,6 @@
 const bluetooth = require('node-bluetooth');
 const device = new bluetooth.DeviceINQ();
-const ipc = require('./src/js/actions/ipcActions');
+const ipc = require('../js/actions/ipcActions');
 
 
 /**

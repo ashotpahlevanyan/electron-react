@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
-  "main": "main.js",
+  "main": "./app/main/main.js",
   "description": "TagMax Desktop Application",
   "author": "Ashot Pahlevanyan",
   "dependencies": {
@@ -89,19 +89,19 @@
     "workbox-webpack-plugin": "3.6.2"
   },
   "scripts": {
-    "electron": "electron main.js",
-    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "rebuild": "electron-rebuild -f -w node-bluetooth",
     "server": "nodemon server/index.js",
+    "electron": "electron main.js",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "rebuild": "electron-rebuild -f -w node-bluetooth",
     "dev": "nf start",
-    "build:mac": "electron-builder -m",
-    "build:win": "electron-builder -w",
-    "build:linux": "electron-builder -l",
-    "build:all": "npm run build:clean & electron-builder -mwl",
-    "build:clean": "rm -r dist",
+    "pack:all": "npm run build:clean & electron-builder -mwl",
+    "pack:mac": "electron-builder -m",
+    "pack:win": "electron-builder -w",
+    "pack:linux": "electron-builder -l",
+    "pack:clean": "rm -r dist",
     "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {

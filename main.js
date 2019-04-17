@@ -1,6 +1,6 @@
 const electron = require('electron');
 const { ipcMain } = require('electron');
-const device = require('./bluetooth');
+const device = require('./src/utils/bluetooth');
 const ipc = require('./src/js/actions/ipcActions');
 
 /*

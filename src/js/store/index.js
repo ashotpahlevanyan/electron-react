@@ -4,7 +4,7 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import { createLogger } from 'redux-logger';
-import rootReducer from '../reducers';
+import rootReducer from '../reducers/index';
 import { fetchDevices } from '../actions/bluetooth';
 import createIpc from 'redux-electron-ipc';
 
